@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Business Card</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .profile-image {
+            border: 4px solid #ffffff;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-card {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+        }
+        
+        .book-btn {
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+        }
+        
+        .section-divider {
+            background: linear-gradient(90deg, rgba(59,130,246,0.1), rgba(59,130,246,0.5), rgba(59,130,246,0.1));
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white rounded-2xl overflow-hidden shadow-xl">
+        <!-- Profile Section -->
+        <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-6 text-center">
+            <div class="flex justify-center">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=200&q=80" 
+                     alt="Profile Image" 
+                     class="profile-image w-32 h-32 rounded-full object-cover">
+            </div>
+            <h1 class="text-2xl font-bold text-white mt-4">Alex Johnson</h1>
+            <p class="text-blue-100 font-medium">Senior UX Designer</p>
+            <p class="text-blue-100">TechSolutions Inc.</p>
+        </div>
+        
+        <!-- Contact Section -->
+        <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Contact Information</h2>
+            
+            <div class="space-y-3">
+                <a href="tel:+15551234567" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-gray-500">Phone</p>
+                        <p class="font-medium text-gray-800">+1 (555) 123-4567</p>
+                    </div>
+                </a>
+                
+                <a href="mailto:alex.johnson@example.com" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-gray-500">Email</p>
+                        <p class="font-medium text-gray-800">alex.johnson@example.com</p>
+                    </div>
+                </a>
+                
+                <a href="https://wa.me/15551234567" target="_blank" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
+                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-gray-500">WhatsApp</p>
+                        <p class="font-medium text-gray-800">Message me</p>
+                    </div>
+                </a>
+                
+                <a href="https://linkedin.com/in/alexjohnson" target="_blank" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-gray-500">LinkedIn</p>
+                        <p class="font-medium text-gray-800">Connect with me</p>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Social Media Links -->
+            <div class="flex justify-center space-x-4 mt-6">
+                <a href="https://twitter.com/alexjohnson" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-blue-400 hover:bg-blue-50">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com/alexjohnson" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-pink-500 hover:bg-pink-50">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://github.com/alexjohnson" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-200">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Divider -->
+        <div class="h-1 section-divider"></div>
+        
+        <!-- Save Contact Section -->
+        <div class="p-6">
+            <button id="saveContactBtn" class="download-btn w-full py-3 rounded-lg text-white font-semibold flex items-center justify-center">
+                <i class="fas fa-download mr-2"></i>
+                Save Contact
+            </button>
+            
+            <div id="downloadFallback" class="hidden mt-4 p-3 bg-yellow-50 rounded-lg text-sm text-yellow-800">
+                <p>If the download didn't start automatically:</p>
+                <ol class="list-decimal pl-5 mt-1">
+                    <li>Tap and hold the button above</li>
+                    <li>Select "Save Link" or "Download"</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Divider -->
+        <div class="h-1 section-divider"></div>
+        
+        <!-- Book a Meeting Section -->
+        <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Schedule a Meeting</h2>
+            <p class="text-gray-600 mb-4">Let's discuss your project needs at a time that works for you.</p>
+            
+            <a href="https://outlook.office.com/bookwithme/user/alexjohnson@example.com" target="_blank" class="book-btn w-full py-3 rounded-lg text-white font-semibold flex items-center justify-center">
+                <i class="far fa-calendar-alt mr-2"></i>
+                Book a Time
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-trigger VCF download on page load
+            setTimeout(function() {
+                downloadVCF();
+            }, 1000);
+            
+            // Manual download button
+            document.getElementById('saveContactBtn').addEventListener('click', function() {
+                downloadVCF();
+                document.getElementById('downloadFallback').classList.remove('hidden');
+            });
+            
+            function downloadVCF() {
+                const vcfData = `BEGIN:VCARD
+VERSION:3.0
+FN:Alex Johnson
+ORG:TechSolutions Inc.
+TITLE:Senior UX Designer
+TEL;TYPE=WORK,VOICE:+1 (555) 123-4567
+EMAIL;TYPE=PREF,INTERNET:alex.johnson@example.com
+URL:https://linkedin.com/in/alexjohnson
+REV:${new Date().toISOString()}
+END:VCARD`;
+                
+                const blob = new Blob([vcfData], { type: 'text/vcard' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'Alex_Johnson.vcf';
+                
+                document.body.appendChild(a);
+                a.click();
+                
+                setTimeout(function() {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 100);
+                
+                // Show fallback instructions if download didn't work after 3 seconds
+                setTimeout(function() {
+                    if (!document.querySelector('a[download="Alex_Johnson.vcf"]')) {
+                        document.getElementById('downloadFallback').classList.remove('hidden');
+                    }
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
