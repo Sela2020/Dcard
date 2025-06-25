@@ -100,42 +100,97 @@
         .floating {
             animation: float 3s ease-in-out infinite;
         }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+        
+        .qr-code {
+            transition: all 0.3s ease;
+        }
+        
+        .qr-code:hover {
+            transform: scale(1.05);
+        }
+        
+        .contact-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-icon:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+        
+        .wave-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 C 20 0, 40 20, 60 10 S 90 0, 100 10' stroke='%23ffffff' stroke-width='2' fill='none' stroke-opacity='0.2'/%3E%3C/svg%3E");
+            background-size: 100px 20px;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center p-4 md:p-8">
     <div class="card-container w-full max-w-md">
         <div id="card" class="card-inner relative">
             <!-- Front Side -->
-            <div class="card-front w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
-                <!-- Profile Section with Floating Animation -->
+            <div class="card-front w-full bg-white rounded-3xl overflow-hidden shadow-2xl relative">
+                <!-- Decorative elements -->
+                <div class="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-blue-100 opacity-20"></div>
+                <div class="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-indigo-100 opacity-20"></div>
+                
+                <!-- Profile Section -->
                 <div class="bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 wave-pattern"></div>
                     <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
                     
                     <div class="flex justify-center floating">
-                        <img src="IMG_2741-2.jpg" 
-                             alt="Profile Image" 
-                             class="profile-image w-32 h-32 rounded-full object-cover">
+                        <div class="relative">
+                            <img src="IMG_2741-2.jpg" 
+                                 alt="Profile Image" 
+                                 class="profile-image w-32 h-32 rounded-full object-cover z-10 relative">
+                            <div class="absolute inset-0 rounded-full bg-blue-500 opacity-10 -z-10 pulse" style="top: -5px; left: -5px; right: -5px; bottom: -5px;"></div>
+                        </div>
                     </div>
                     <h1 class="text-2xl font-bold text-white mt-6">Eselase Bali-Banini</h1>
                     <p class="text-blue-100 font-medium mt-1">Assistant IT/IM Officer</p>
                     <p class="text-blue-100">Digital Technology Directorate</p>
                     
                     <!-- Flip Button -->
-                    <button id="flipBtn" class="flip-btn absolute top-4 right-4 w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-white hover:bg-opacity-30">
+                    <button id="flipBtn" class="flip-btn absolute top-4 right-4 w-10 h-10 glass-effect rounded-full flex items-center justify-center text-white hover:bg-opacity-30">
                         <i class="fas fa-exchange-alt"></i>
+                    </button>
+                    
+                    <!-- QR Code Button -->
+                    <button id="qrBtn" class="flip-btn absolute top-4 left-4 w-10 h-10 glass-effect rounded-full flex items-center justify-center text-white hover:bg-opacity-30">
+                        <i class="fas fa-qrcode"></i>
                     </button>
                 </div>
                 
                 <!-- Contact Section -->
-                <div class="p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-id-card mr-2 text-blue-500"></i>
-                        Contact Information
-                    </h2>
+                <div class="p-6 relative z-10">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800 flex items-center">
+                            <i class="fas fa-id-card mr-2 text-blue-500 contact-icon"></i>
+                            Contact Information
+                        </h2>
+                        <div class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Tap to connect</div>
+                    </div>
                     
                     <div class="space-y-3">
                         <a href="tel:+233245332299" class="contact-card flex items-center p-4 rounded-xl">
-                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 contact-icon">
                                 <i class="fas fa-phone text-lg"></i>
                             </div>
                             <div class="ml-4">
@@ -148,7 +203,7 @@
                         </a>
                         
                         <a href="mailto:bali-banini.eselase@moc.gov.gh" class="contact-card flex items-center p-4 rounded-xl">
-                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 contact-icon">
                                 <i class="fas fa-envelope text-lg"></i>
                             </div>
                             <div class="ml-4">
@@ -161,7 +216,7 @@
                         </a>
                         
                         <a href="https://wa.me/+233245332299" target="_blank" class="contact-card flex items-center p-4 rounded-xl">
-                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600">
+                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600 contact-icon">
                                 <i class="fab fa-whatsapp text-lg"></i>
                             </div>
                             <div class="ml-4">
@@ -188,40 +243,48 @@
                     </div>
                     
                     <!-- Social Media Links -->
-                    <div class="flex justify-center space-x-4 mt-6">
-                        <a href="https://linkedin.com/in/eselase-bali-banini-8675ba271/?originalSubdomain=gh" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-50">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://wa.me/+233245332299" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-green-500 hover:bg-green-50">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="mailto:bali-banini.eselase@moc.gov.gh" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-red-500 hover:bg-red-50">
-                            <i class="fas fa-envelope"></i>
-                        </a>
+                    <div class="mt-8">
+                        <div class="section-divider h-px w-full my-4"></div>
+                        <p class="text-center text-sm text-gray-500 mb-4">Connect with me on</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://linkedin.com/in/eselase-bali-banini-8675ba271/?originalSubdomain=gh" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-50 transition-all duration-300 hover:-translate-y-1">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://wa.me/+233245332299" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-green-500 hover:bg-green-50 transition-all duration-300 hover:-translate-y-1">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="mailto:bali-banini.eselase@moc.gov.gh" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-red-500 hover:bg-red-50 transition-all duration-300 hover:-translate-y-1">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://maps.app.goo.gl/Prsdx6suPyVVFZJ8A" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-purple-500 hover:bg-purple-50 transition-all duration-300 hover:-translate-y-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Back Side -->
-            <div class="card-back absolute inset-0 w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
+            <div class="card-back absolute inset-0 w-full bg-white rounded-3xl overflow-hidden shadow-2xl">
                 <!-- Back Header -->
                 <div class="bg-gradient-to-br from-indigo-700 to-blue-600 p-6 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 wave-pattern"></div>
                     <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
                     
-                    <h1 class="text-2xl font-bold text-white">More About Me</h1>
-                    <p class="text-blue-100 mt-1">Professional Details</p>
+                    <h1 class="text-2xl font-bold text-white">Professional Profile</h1>
+                    <p class="text-blue-100 mt-1">Eselase Bali-Banini</p>
                     
                     <!-- Flip Button -->
-                    <button id="flipBackBtn" class="flip-btn absolute top-4 right-4 w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-white hover:bg-opacity-30">
+                    <button id="flipBackBtn" class="flip-btn absolute top-4 right-4 w-10 h-10 glass-effect rounded-full flex items-center justify-center text-white hover:bg-opacity-30">
                         <i class="fas fa-exchange-alt"></i>
                     </button>
                 </div>
                 
                 <!-- Back Content -->
-                <div class="p-6">
+                <div class="p-6 relative z-10">
                     <div class="mb-6">
                         <h3 class="text-lg font-semibold text-gray-800 flex items-center">
-                            <i class="fas fa-briefcase mr-2 text-blue-500"></i>
+                            <i class="fas fa-briefcase mr-2 text-blue-500 contact-icon"></i>
                             Professional Summary
                         </h3>
                         <p class="text-gray-600 mt-2 text-sm">
@@ -232,24 +295,29 @@
                     
                     <div class="mb-6">
                         <h3 class="text-lg font-semibold text-gray-800 flex items-center">
-                            <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-500 contact-icon"></i>
                             Location
                         </h3>
-                        <div class="mt-2 flex items-center">
-                            <i class="fas fa-building text-gray-400 mr-2"></i>
-                            <p class="text-gray-600 text-sm">
-                                Ministry of Communication, Digital Tech & Innovation<br>
-                                Accra, Ghana
-                            </p>
+                        <div class="mt-2 flex items-start">
+                            <i class="fas fa-building text-gray-400 mr-2 mt-1"></i>
+                            <div>
+                                <p class="text-gray-600 text-sm">
+                                    <span class="font-medium">Ministry of Communication, Digital Technology & Innovations</span><br>
+                                    5th & 6th Floors, Abdul Diof Road, Ridge, Accra, Ghana
+                                </p>
+                                <p class="text-gray-600 text-sm mt-1">
+                                    <span class="font-medium">Mailing Address:</span> P.O. BOX M3, Accra, Ghana
+                                </p>
+                                <a href="https://maps.app.goo.gl/Prsdx6suPyVVFZJ8A" target="_blank" class="inline-block mt-2 text-blue-500 text-sm hover:underline">
+                                    <i class="fas fa-map-pin mr-1"></i> View on Map
+                                </a>
+                            </div>
                         </div>
-                        <a href="https://maps.app.goo.gl/Prsdx6suPyVVFZJ8A" target="_blank" class="inline-block mt-2 text-blue-500 text-sm hover:underline">
-                            <i class="fas fa-map-pin mr-1"></i> View on Map
-                        </a>
                     </div>
                     
                     <div class="mb-6">
                         <h3 class="text-lg font-semibold text-gray-800 flex items-center">
-                            <i class="fas fa-clock mr-2 text-blue-500"></i>
+                            <i class="fas fa-clock mr-2 text-blue-500 contact-icon"></i>
                             Availability
                         </h3>
                         <p class="text-gray-600 mt-2 text-sm">
@@ -274,9 +342,26 @@
         </div>
     </div>
 
+    <!-- QR Code Modal -->
+    <div id="qrModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-6 max-w-xs w-full mx-4 relative">
+            <button id="closeQrModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="text-lg font-semibold text-gray-800 mb-4 text-center">Scan to Connect</h3>
+            <div class="qr-code bg-white p-4 rounded-lg border border-gray-200 flex justify-center">
+                <!-- Placeholder for QR code - in a real implementation, you would generate a QR code -->
+                <div class="w-48 h-48 bg-gray-100 flex items-center justify-center text-gray-400">
+                    <i class="fas fa-qrcode text-6xl"></i>
+                </div>
+            </div>
+            <p class="text-center text-sm text-gray-600 mt-4">Scan this QR code to save my contact</p>
+        </div>
+    </div>
+
     <!-- Download Fallback Modal -->
     <div id="downloadModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-xl p-6 max-w-sm w-full mx-4">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full mx-4">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-lg font-semibold text-gray-800">Save Contact</h3>
                 <button id="closeModal" class="text-gray-400 hover:text-gray-600">
@@ -313,6 +398,25 @@
                 card.classList.remove('flipped');
             });
             
+            // QR Code Modal
+            const qrModal = document.getElementById('qrModal');
+            const qrBtn = document.getElementById('qrBtn');
+            const closeQrModal = document.getElementById('closeQrModal');
+            
+            qrBtn.addEventListener('click', function() {
+                qrModal.classList.remove('hidden');
+            });
+            
+            closeQrModal.addEventListener('click', function() {
+                qrModal.classList.add('hidden');
+            });
+            
+            qrModal.addEventListener('click', function(e) {
+                if (e.target === qrModal) {
+                    qrModal.classList.add('hidden');
+                }
+            });
+            
             // Download VCF functionality
             const downloadModal = document.getElementById('downloadModal');
             const closeModal = document.getElementById('closeModal');
@@ -328,7 +432,7 @@ TITLE:Assistant IT/IM Officer
 TEL;TYPE=WORK,VOICE:+233245332299
 EMAIL;TYPE=PREF,INTERNET:bali-banini.eselase@moc.gov.gh
 URL:https://www.linkedin.com/in/eselase-bali-banini-8675ba271/?originalSubdomain=gh
-ADR;TYPE=WORK:;;Ministry of Communication, Digital Tech & Innovation;Accra;;GA-123-4567;Ghana
+ADR;TYPE=WORK:;;Ministry of Communication, Digital Technology & Innovation;Accra;;GA-123-4567;Ghana
 PHOTO;VALUE=URL:https://yourdomain.com/IMG_2741-2.jpg
 item1.URL;TYPE=pref:https://maps.app.goo.gl/Prsdx6suPyVVFZJ8A
 item1.X-ABLabel:Location
@@ -359,11 +463,6 @@ END:VCARD`;
                 }, 3000);
             }
             
-            // Auto-trigger VCF download on page load
-            setTimeout(function() {
-                downloadVCF();
-            }, 1000);
-            
             // Manual download buttons
             document.getElementById('saveContactBtn').addEventListener('click', downloadVCF);
             document.getElementById('saveContactBtnBack').addEventListener('click', downloadVCF);
@@ -383,6 +482,11 @@ END:VCARD`;
                     downloadModal.classList.add('hidden');
                 }
             });
+            
+            // Auto-trigger VCF download on page load (removed for better UX)
+            // setTimeout(function() {
+            //     downloadVCF();
+            // }, 1000);
         });
     </script>
 </body>
