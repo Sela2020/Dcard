@@ -46,13 +46,13 @@
         <!-- Profile Section -->
         <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-6 text-center">
             <div class="flex justify-center">
-                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=200&q=80" 
+                <img src="IMG_2741-2.jpg" 
                      alt="Profile Image" 
                      class="profile-image w-32 h-32 rounded-full object-cover">
             </div>
-            <h1 class="text-2xl font-bold text-white mt-4">Alex Johnson</h1>
-            <p class="text-blue-100 font-medium">Senior UX Designer</p>
-            <p class="text-blue-100">TechSolutions Inc.</p>
+            <h1 class="text-2xl font-bold text-white mt-4">Eselase Bali-Banini</h1>
+            <p class="text-blue-100 font-medium">Assistant IT/IM Officer</p>
+            <p class="text-blue-100">Digital Technology Directorate</p>
         </div>
         
         <!-- Contact Section -->
@@ -66,21 +66,21 @@
                     </div>
                     <div class="ml-3">
                         <p class="text-sm text-gray-500">Phone</p>
-                        <p class="font-medium text-gray-800">+1 (555) 123-4567</p>
+                        <p class="font-medium text-gray-800">+233245332299</p>
                     </div>
                 </a>
                 
-                <a href="mailto:alex.johnson@example.com" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
+                <a href="mailto:bali-banini.eselase@moc.gov.gh" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
                     <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
                         <i class="fas fa-envelope"></i>
                     </div>
                     <div class="ml-3">
                         <p class="text-sm text-gray-500">Email</p>
-                        <p class="font-medium text-gray-800">alex.johnson@example.com</p>
+                        <p class="font-medium text-gray-800">bali-banini.eselase@moc.gov.gh</p>
                     </div>
                 </a>
                 
-                <a href="https://wa.me/15551234567" target="_blank" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
+                <a href="https://wa.me/+233245332299" target="_blank" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
                     <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
                         <i class="fab fa-whatsapp"></i>
                     </div>
@@ -142,7 +142,7 @@
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Schedule a Meeting</h2>
             <p class="text-gray-600 mb-4">Let's discuss your project needs at a time that works for you.</p>
             
-            <a href="https://outlook.office.com/bookwithme/user/alexjohnson@example.com" target="_blank" class="book-btn w-full py-3 rounded-lg text-white font-semibold flex items-center justify-center">
+            <a href="https://outlook.office.com/bookwithme/user/df1daab6383a4b94ad9b84091290e469@moc.gov.gh?anonymous&ismsaljsauthenabled&ep=plink" target="_blank" class="book-btn w-full py-3 rounded-lg text-white font-semibold flex items-center justify-center">
                 <i class="far fa-calendar-alt mr-2"></i>
                 Book a Time
             </a>
@@ -165,12 +165,12 @@
             function downloadVCF() {
                 const vcfData = `BEGIN:VCARD
 VERSION:3.0
-FN:Alex Johnson
+FN:Eselase Bali-Banini
 ORG:TechSolutions Inc.
 TITLE:Senior UX Designer
 TEL;TYPE=WORK,VOICE:+1 (555) 123-4567
-EMAIL;TYPE=PREF,INTERNET:alex.johnson@example.com
-URL:https://linkedin.com/in/alexjohnson
+EMAIL;TYPE=PREF,INTERNET:bali-banini.eselase@moc.gov.gh
+URL:https://www.linkedin.com/in/eselase-bali-banini-8675ba271/?originalSubdomain=gh
 REV:${new Date().toISOString()}
 END:VCARD`;
                 
@@ -180,7 +180,7 @@ END:VCARD`;
                 const a = document.createElement('a');
                 a.style.display = 'none';
                 a.href = url;
-                a.download = 'Alex_Johnson.vcf';
+                a.download = 'Eselase_Bali-Banini.vcf';
                 
                 document.body.appendChild(a);
                 a.click();
@@ -192,7 +192,7 @@ END:VCARD`;
                 
                 // Show fallback instructions if download didn't work after 3 seconds
                 setTimeout(function() {
-                    if (!document.querySelector('a[download="Alex_Johnson.vcf"]')) {
+                    if (!document.querySelector('a[download="Eselase_Bali-Banini.vcf"]')) {
                         document.getElementById('downloadFallback').classList.remove('hidden');
                     }
                 }, 3000);
