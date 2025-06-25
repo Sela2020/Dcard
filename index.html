@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Business Card</title>
+    <title>Digital Business Card | Eselase Bali-Banini</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,160 +11,315 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
         }
         
         .profile-image {
-            border: 4px solid #ffffff;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-image:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.5);
         }
         
         .contact-card {
             transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
         }
         
         .contact-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            background: white;
         }
         
         .download-btn {
             background: linear-gradient(135deg, #3b82f6, #6366f1);
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
         }
         
         .book-btn {
             background: linear-gradient(135deg, #10b981, #3b82f6);
+            transition: all 0.3s ease;
+        }
+        
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
         }
         
         .section-divider {
-            background: linear-gradient(90deg, rgba(59,130,246,0.1), rgba(59,130,246,0.5), rgba(59,130,246,0.1));
+            background: linear-gradient(90deg, rgba(59,130,246,0), rgba(59,130,246,0.3), rgba(59,130,246,0));
+        }
+        
+        .card-container {
+            perspective: 1000px;
+        }
+        
+        .card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .card-front, .card-back {
+            backface-visibility: hidden;
+        }
+        
+        .card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .flip-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
-    <div class="w-full max-w-md bg-white rounded-2xl overflow-hidden shadow-xl">
-        <!-- Profile Section -->
-        <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-6 text-center">
-            <div class="flex justify-center">
-                <img src="IMG_2741-2.jpg" 
-                     alt="Profile Image" 
-                     class="profile-image w-32 h-32 rounded-full object-cover">
-            </div>
-            <h1 class="text-2xl font-bold text-white mt-4">Eselase Bali-Banini</h1>
-            <p class="text-blue-100 font-medium">Assistant IT/IM Officer</p>
-            <p class="text-blue-100">Digital Technology Directorate</p>
-        </div>
-        
-        <!-- Contact Section -->
-        <div class="p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Contact Information</h2>
-            
-            <div class="space-y-3">
-                <a href="tel:+15551234567" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
-                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
-                        <i class="fas fa-phone"></i>
+<body class="flex items-center justify-center p-4 md:p-8">
+    <div class="card-container w-full max-w-md">
+        <div id="card" class="card-inner relative">
+            <!-- Front Side -->
+            <div class="card-front w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
+                <!-- Profile Section with Floating Animation -->
+                <div class="bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
+                    
+                    <div class="flex justify-center floating">
+                        <img src="IMG_2741-2.jpg" 
+                             alt="Profile Image" 
+                             class="profile-image w-32 h-32 rounded-full object-cover">
                     </div>
-                    <div class="ml-3">
-                        <p class="text-sm text-gray-500">Phone</p>
-                        <p class="font-medium text-gray-800">+233245332299</p>
-                    </div>
-                </a>
+                    <h1 class="text-2xl font-bold text-white mt-6">Eselase Bali-Banini</h1>
+                    <p class="text-blue-100 font-medium mt-1">Assistant IT/IM Officer</p>
+                    <p class="text-blue-100">Digital Technology Directorate</p>
+                    
+                    <!-- Flip Button -->
+                    <button id="flipBtn" class="flip-btn absolute top-4 right-4 w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-white hover:bg-opacity-30">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                </div>
                 
-                <a href="mailto:bali-banini.eselase@moc.gov.gh" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
-                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
-                        <i class="fas fa-envelope"></i>
+                <!-- Contact Section -->
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-id-card mr-2 text-blue-500"></i>
+                        Contact Information
+                    </h2>
+                    
+                    <div class="space-y-3">
+                        <a href="tel:+233245332299" class="contact-card flex items-center p-4 rounded-xl">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+                                <i class="fas fa-phone text-lg"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500">Phone</p>
+                                <p class="font-medium text-gray-800">+233 24 533 2299</p>
+                            </div>
+                            <div class="ml-auto text-blue-400">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="mailto:bali-banini.eselase@moc.gov.gh" class="contact-card flex items-center p-4 rounded-xl">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+                                <i class="fas fa-envelope text-lg"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500">Email</p>
+                                <p class="font-medium text-gray-800">bali-banini.eselase@moc.gov.gh</p>
+                            </div>
+                            <div class="ml-auto text-blue-400">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="https://wa.me/+233245332299" target="_blank" class="contact-card flex items-center p-4 rounded-xl">
+                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500">WhatsApp</p>
+                                <p class="font-medium text-gray-800">Message me</p>
+                            </div>
+                            <div class="ml-auto text-green-400">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="ml-3">
-                        <p class="text-sm text-gray-500">Email</p>
-                        <p class="font-medium text-gray-800">bali-banini.eselase@moc.gov.gh</p>
+                    
+                    <!-- Quick Actions -->
+                    <div class="grid grid-cols-2 gap-3 mt-6">
+                        <button id="saveContactBtn" class="download-btn py-3 rounded-xl text-white font-semibold flex items-center justify-center">
+                            <i class="fas fa-download mr-2"></i>
+                            Save Contact
+                        </button>
+                        
+                        <a href="https://outlook.office.com/bookwithme/user/df1daab6383a4b94ad9b84091290e469@moc.gov.gh?anonymous&ismsaljsauthenabled&ep=plink" target="_blank" class="book-btn py-3 rounded-xl text-white font-semibold flex items-center justify-center">
+                            <i class="far fa-calendar-alt mr-2"></i>
+                            Book Meeting
+                        </a>
                     </div>
-                </a>
-                
-                <a href="https://wa.me/+233245332299" target="_blank" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
-                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
-                        <i class="fab fa-whatsapp"></i>
+                    
+                    <!-- Social Media Links -->
+                    <div class="flex justify-center space-x-4 mt-6">
+                        <a href="https://linkedin.com/in/eselase-bali-banini-8675ba271/?originalSubdomain=gh" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-50">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://wa.me/+233245332299" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-green-500 hover:bg-green-50">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:bali-banini.eselase@moc.gov.gh" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-red-500 hover:bg-red-50">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                     </div>
-                    <div class="ml-3">
-                        <p class="text-sm text-gray-500">WhatsApp</p>
-                        <p class="font-medium text-gray-800">Message me</p>
-                    </div>
-                </a>
-                
-                <a href="https://linkedin.com/in/alexjohnson" target="_blank" class="contact-card flex items-center p-3 bg-gray-50 rounded-lg">
-                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
-                        <i class="fab fa-linkedin-in"></i>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm text-gray-500">LinkedIn</p>
-                        <p class="font-medium text-gray-800">Connect with me</p>
-                    </div>
-                </a>
+                </div>
             </div>
             
-            <!-- Social Media Links -->
-            <div class="flex justify-center space-x-4 mt-6">
-                <a href="https://twitter.com/alexjohnson" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-blue-400 hover:bg-blue-50">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://instagram.com/alexjohnson" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-pink-500 hover:bg-pink-50">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://github.com/alexjohnson" target="_blank" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-200">
-                    <i class="fab fa-github"></i>
-                </a>
+            <!-- Back Side -->
+            <div class="card-back absolute inset-0 w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
+                <!-- Back Header -->
+                <div class="bg-gradient-to-br from-indigo-700 to-blue-600 p-6 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
+                    
+                    <h1 class="text-2xl font-bold text-white">More About Me</h1>
+                    <p class="text-blue-100 mt-1">Professional Details</p>
+                    
+                    <!-- Flip Button -->
+                    <button id="flipBackBtn" class="flip-btn absolute top-4 right-4 w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-white hover:bg-opacity-30">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                </div>
+                
+                <!-- Back Content -->
+                <div class="p-6">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                            <i class="fas fa-briefcase mr-2 text-blue-500"></i>
+                            Professional Summary
+                        </h3>
+                        <p class="text-gray-600 mt-2 text-sm">
+                            IT professional with expertise in information management and digital technology solutions. 
+                            Currently serving as Assistant IT/IM Officer at the Ministry of Communication, Digital Technology and Innovations.
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                            Location
+                        </h3>
+                        <div class="mt-2 flex items-center">
+                            <i class="fas fa-building text-gray-400 mr-2"></i>
+                            <p class="text-gray-600 text-sm">
+                                Ministry of Communication, Digital Tech & Innovation<br>
+                                Accra, Ghana
+                            </p>
+                        </div>
+                        <a href="https://maps.app.goo.gl/Prsdx6suPyVVFZJ8A" target="_blank" class="inline-block mt-2 text-blue-500 text-sm hover:underline">
+                            <i class="fas fa-map-pin mr-1"></i> View on Map
+                        </a>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                            <i class="fas fa-clock mr-2 text-blue-500"></i>
+                            Availability
+                        </h3>
+                        <p class="text-gray-600 mt-2 text-sm">
+                            <i class="far fa-calendar-check text-green-500 mr-1"></i>
+                            Available for meetings Monday-Friday, 9:00 AM - 4:00 PM
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3 mt-6">
+                        <button id="saveContactBtnBack" class="download-btn py-3 rounded-xl text-white font-semibold flex items-center justify-center">
+                            <i class="fas fa-download mr-2"></i>
+                            Save Contact
+                        </button>
+                        
+                        <a href="https://outlook.office.com/bookwithme/user/df1daab6383a4b94ad9b84091290e469@moc.gov.gh?anonymous&ismsaljsauthenabled&ep=plink" target="_blank" class="book-btn py-3 rounded-xl text-white font-semibold flex items-center justify-center">
+                            <i class="far fa-calendar-alt mr-2"></i>
+                            Book Meeting
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <!-- Divider -->
-        <div class="h-1 section-divider"></div>
-        
-        <!-- Save Contact Section -->
-        <div class="p-6">
-            <button id="saveContactBtn" class="download-btn w-full py-3 rounded-lg text-white font-semibold flex items-center justify-center">
-                <i class="fas fa-download mr-2"></i>
-                Save Contact
-            </button>
-            
-            <div id="downloadFallback" class="hidden mt-4 p-3 bg-yellow-50 rounded-lg text-sm text-yellow-800">
-                <p>If the download didn't start automatically:</p>
-                <ol class="list-decimal pl-5 mt-1">
-                    <li>Tap and hold the button above</li>
-                    <li>Select "Save Link" or "Download"</li>
-                </ol>
+    </div>
+
+    <!-- Download Fallback Modal -->
+    <div id="downloadModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 max-w-sm w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Save Contact</h3>
+                <button id="closeModal" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-        </div>
-        
-        <!-- Divider -->
-        <div class="h-1 section-divider"></div>
-        
-        <!-- Book a Meeting Section -->
-        <div class="p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Schedule a Meeting</h2>
-            <p class="text-gray-600 mb-4">Let's discuss your project needs at a time that works for you.</p>
-            
-            <a href="https://outlook.office.com/bookwithme/user/df1daab6383a4b94ad9b84091290e469@moc.gov.gh?anonymous&ismsaljsauthenabled&ep=plink" target="_blank" class="book-btn w-full py-3 rounded-lg text-white font-semibold flex items-center justify-center">
-                <i class="far fa-calendar-alt mr-2"></i>
-                Book a Time
-            </a>
+            <p class="text-gray-600 mb-4">If the download didn't start automatically:</p>
+            <ol class="list-decimal pl-5 space-y-2 text-sm text-gray-700">
+                <li>Tap and hold the button below</li>
+                <li>Select "Save Link" or "Download"</li>
+                <li>Choose where to save the contact file</li>
+            </ol>
+            <div class="mt-6">
+                <button id="manualDownload" class="download-btn w-full py-3 rounded-lg text-white font-semibold">
+                    <i class="fas fa-download mr-2"></i>
+                    Download Again
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Auto-trigger VCF download on page load
-            setTimeout(function() {
-                downloadVCF();
-            }, 1000);
+            // Flip card functionality
+            const card = document.getElementById('card');
+            const flipBtn = document.getElementById('flipBtn');
+            const flipBackBtn = document.getElementById('flipBackBtn');
             
-            // Manual download button
-            document.getElementById('saveContactBtn').addEventListener('click', function() {
-                downloadVCF();
-                document.getElementById('downloadFallback').classList.remove('hidden');
+            flipBtn.addEventListener('click', function() {
+                card.classList.add('flipped');
             });
+            
+            flipBackBtn.addEventListener('click', function() {
+                card.classList.remove('flipped');
+            });
+            
+            // Download VCF functionality
+            const downloadModal = document.getElementById('downloadModal');
+            const closeModal = document.getElementById('closeModal');
+            const manualDownload = document.getElementById('manualDownload');
             
             function downloadVCF() {
                 const vcfData = `BEGIN:VCARD
-
 VERSION:3.0
 N:Bali-Banini;Eselase;;;
 FN:Eselase Bali-Banini
@@ -196,13 +351,38 @@ END:VCARD`;
                     window.URL.revokeObjectURL(url);
                 }, 100);
                 
-                // Show fallback instructions if download didn't work after 3 seconds
+                // Show modal if download didn't work after 3 seconds
                 setTimeout(function() {
                     if (!document.querySelector('a[download="Eselase_Bali-Banini.vcf"]')) {
-                        document.getElementById('downloadFallback').classList.remove('hidden');
+                        downloadModal.classList.remove('hidden');
                     }
                 }, 3000);
             }
+            
+            // Auto-trigger VCF download on page load
+            setTimeout(function() {
+                downloadVCF();
+            }, 1000);
+            
+            // Manual download buttons
+            document.getElementById('saveContactBtn').addEventListener('click', downloadVCF);
+            document.getElementById('saveContactBtnBack').addEventListener('click', downloadVCF);
+            manualDownload.addEventListener('click', function() {
+                downloadVCF();
+                downloadModal.classList.add('hidden');
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                downloadModal.classList.add('hidden');
+            });
+            
+            // Close modal when clicking outside
+            downloadModal.addEventListener('click', function(e) {
+                if (e.target === downloadModal) {
+                    downloadModal.classList.add('hidden');
+                }
+            });
         });
     </script>
 </body>
