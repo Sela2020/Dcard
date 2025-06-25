@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
     <title>Digital Business Card | Eselase Bali-Banini</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -73,18 +74,23 @@
         
         .card-front, .card-back {
             backface-visibility: hidden;
-            position: absolute; /* Add this line */
-            top: 0;            /* Add this line */
-            left: 0;           /* Add this line */
-            right: 0;          /* Add this line */
-            bottom: 0;         /* Add this line */
+            -webkit-backface-visibility: hidden; /* For Safari/iOS */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d; /* For Safari/iOS */
         }
         
         .card-back {
             transform: rotateY(180deg);
-            pointer-events: none; /* Add this line - disables clicks when back is hidden */
+            -webkit-transform: rotateY(180deg); /* For Safari/iOS */
+            pointer-events: none;
         }
-
         .flipped .card-front {
             pointer-events: none; /* Disable front when flipped */
         }
@@ -95,6 +101,7 @@
         
         .flipped {
             transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg); /* For Safari/iOS */
         }
         
         .flip-btn {
@@ -497,10 +504,12 @@ END:VCARD`;
                 }
             });
             
-            // Auto-trigger VCF download on page load (removed for better UX)
-            // setTimeout(function() {
-            //     downloadVCF();
-            // }, 1000);
+            // Auto-trigger VCF download on page load
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    downloadVCF();
+                }, 1000); // 1 second delay to allow page to fully load
+            });
         });
     </script>
 </body>
