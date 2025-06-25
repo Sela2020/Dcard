@@ -91,6 +91,24 @@
             -webkit-transform: rotateY(180deg); /* For Safari/iOS */
             pointer-events: none;
         }
+        /* Organization logo background for back side */
+        .card-back::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://moc.gov.gh/wp-content/uploads/2023/03/MOC-Card-Back.png'); /* Replace with your logo path */
+            background-size: 60%; /* Adjust size as needed */
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            filter: blur(2px);
+            -webkit-filter: blur(8px); /* For Safari */
+            z-index: -1;
+        }
+
         .flipped .card-front {
             pointer-events: none; /* Disable front when flipped */
         }
@@ -160,9 +178,15 @@
             background-size: 100px 20px;
             opacity: 0.5;
         }
+        .footer-container {
+        position: relative;
+        z-index: 10;
+        margin-top: 2rem;
+        padding-bottom: 1rem;
+        }
     </style>
 </head>
-<body class="flex items-center justify-center p-4 md:p-8">
+<body class="flex flex-col items-center justify-center p-4 md:p-8 min-h-screen">
     <div class="card-container w-full max-w-md">
         <div id="card" class="card-inner relative">
             <!-- Front Side -->
@@ -288,7 +312,7 @@
             <!-- Back Side -->
             <div class="card-back absolute inset-0 w-full bg-white rounded-3xl overflow-hidden shadow-2xl">
                 <!-- Back Header -->
-                <div class="bg-gradient-to-br from-indigo-700 to-blue-600 p-6 text-center relative overflow-hidden">
+                <div class="bg-gradient-to-br from-indigo-700 to-blue-600 p-6 text-center relative overflow-hidden z-10">
                     <div class="absolute inset-0 wave-pattern"></div>
                     <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
                     
@@ -324,7 +348,7 @@
                             <div>
                                 <p class="text-gray-600 text-sm">
                                     <span class="font-medium">Ministry of Communication, Digital Technology & Innovations</span><br>
-                                    5th & 6th Floors, Abdul Diof Road, Ridge, Accra, Ghana
+                                    5th & 6th Floors<br> Abdul Diof Road, Ridge, Accra, Ghana
                                 </p>
                                 <p class="text-gray-600 text-sm mt-1">
                                     <span class="font-medium">Mailing Address:</span> P.O. BOX M3, Accra, Ghana
@@ -343,7 +367,7 @@
                         </h3>
                         <p class="text-gray-600 mt-2 text-sm">
                             <i class="far fa-calendar-check text-green-500 mr-1"></i>
-                            Available for meetings Monday-Friday, 9:00 AM - 4:00 PM
+                            Available for meetings Monday-Friday, 9:00 AM - 5:00 PM
                         </p>
                     </div>
                     
@@ -403,6 +427,7 @@
             </div>
         </div>
     </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -512,5 +537,13 @@ END:VCARD`;
             });
         });
     </script>
+
+    <!-- Footer Container -->
+<div class="footer-container w-full flex justify-center px-4">
+  <div class="max-w-md w-full text-center text-gray-500 text-xs py-4 border-t border-gray-200 mt-8">
+    © Ministry of Communications, Digital Technology and Innovations<br>
+    All Rights Reserved
+  </div>
+</div>
 </body>
 </html>
