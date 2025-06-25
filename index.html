@@ -73,10 +73,24 @@
         
         .card-front, .card-back {
             backface-visibility: hidden;
+            position: absolute; /* Add this line */
+            top: 0;            /* Add this line */
+            left: 0;           /* Add this line */
+            right: 0;          /* Add this line */
+            bottom: 0;         /* Add this line */
         }
         
         .card-back {
             transform: rotateY(180deg);
+            pointer-events: none; /* Add this line - disables clicks when back is hidden */
+        }
+
+        .flipped .card-front {
+            pointer-events: none; /* Disable front when flipped */
+        }
+
+        .flipped .card-back {
+            pointer-events: auto; /* Enable back when flipped */
         }
         
         .flipped {
