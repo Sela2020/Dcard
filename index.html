@@ -184,6 +184,13 @@
         margin-top: 2rem;
         padding-bottom: 1rem;
         }
+        /* Ensure buttons don't shrink too much */
+        @media (max-width: 640px) {
+            #saveContactBtn, #saveContactBtnBack, .book-btn {
+                min-height: 2.5rem; /* Minimum button height */
+                white-space: nowrap; /* Prevent text wrapping */
+            }
+        }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center p-4 md:p-8 min-h-screen">
@@ -253,7 +260,7 @@
                             </div>
                             <div class="ml-4">
                                 <p class="text-sm text-gray-500">Email</p>
-                                <p class="font-medium text-gray-800">bali-banini.eselase@moc.gov.gh</p>
+                                <p class="font-medium text-gray-800">bali****@moc.gov.gh</p>
                             </div>
                             <div class="ml-auto text-blue-400">
                                 <i class="fas fa-chevron-right"></i>
@@ -275,14 +282,14 @@
                     </div>
                     
                     <!-- Quick Actions -->
-                    <div class="grid grid-cols-2 gap-3 mt-6">
-                        <button id="saveContactBtn" class="download-btn py-3 rounded-xl text-white font-semibold flex items-center justify-center">
-                            <i class="fas fa-download mr-2"></i>
+                    <div class="grid grid-cols-2 gap-2 sm:gap-3 mt-6 px-2 sm:px-0">
+                        <button id="saveContactBtn" class="download-btn py-2 sm:py-3 px-2 text-xs sm:text-sm rounded-xl text-white font-semibold flex items-center justify-center">
+                            <i class="fas fa-download mr-1 sm:mr-2"></i>
                             Save Contact
                         </button>
                         
-                        <a href="https://outlook.office.com/bookwithme/user/df1daab6383a4b94ad9b84091290e469@moc.gov.gh?anonymous&ismsaljsauthenabled&ep=plink" target="_blank" class="book-btn py-3 rounded-xl text-white font-semibold flex items-center justify-center">
-                            <i class="far fa-calendar-alt mr-2"></i>
+                        <a href="https://outlook.office.com/bookwithme/user/df1daab6383a4b94ad9b84091290e469@moc.gov.gh?anonymous&ismsaljsauthenabled&ep=plink" target="_blank" class="book-btn py-2 sm:py-3 px-2 text-xs sm:text-sm rounded-xl text-white font-semibold flex items-center justify-center">
+                            <i class="far fa-calendar-alt mr-1 sm:mr-2"></i>
                             Book Meeting
                         </a>
                     </div>
@@ -371,14 +378,14 @@
                         </p>
                     </div>
                     
-                    <div class="grid grid-cols-2 gap-3 mt-6">
-                        <button id="saveContactBtnBack" class="download-btn py-3 rounded-xl text-white font-semibold flex items-center justify-center">
-                            <i class="fas fa-download mr-2"></i>
+                    <div class="grid grid-cols-2 gap-2 sm:gap-3 mt-6 px-2 sm:px-0">
+                        <button id="saveContactBtnBack" class="download-btn py-2 sm:py-3 px-2 text-xs sm:text-sm rounded-xl text-white font-semibold flex items-center justify-center">
+                            <i class="fas fa-download mr-1 sm:mr-2"></i>
                             Save Contact
                         </button>
                         
-                        <a href="https://outlook.office.com/bookwithme/user/df1daab6383a4b94ad9b84091290e469@moc.gov.gh?anonymous&ismsaljsauthenabled&ep=plink" target="_blank" class="book-btn py-3 rounded-xl text-white font-semibold flex items-center justify-center">
-                            <i class="far fa-calendar-alt mr-2"></i>
+                        <a href="https://outlook.office.com/bookwithme/user/df1daab6383a4b94ad9b84091290e469@moc.gov.gh?anonymous&ismsaljsauthenabled&ep=plink" target="_blank" class="book-btn py-2 sm:py-3 px-2 text-xs sm:text-sm rounded-xl text-white font-semibold flex items-center justify-center">
+                            <i class="far fa-calendar-alt mr-1 sm:mr-2"></i>
                             Book Meeting
                         </a>
                     </div>
