@@ -103,9 +103,9 @@
             background-size: 60%; /* Adjust size as needed */
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.5;
+            opacity: 0.3;
             filter: blur(2px);
-            -webkit-filter: blur(8px); /* For Safari */
+            -webkit-filter: blur(2px); /* For Safari */
             z-index: -1;
         }
 
@@ -374,7 +374,7 @@
                         </h3>
                         <p class="text-gray-600 mt-2 text-sm">
                             <i class="far fa-calendar-check text-green-500 mr-1"></i>
-                            Available for meetings Monday-Friday, 9:00 AM - 5:00 PM
+                            Available for meetings <br> Monday-Friday, 9:00 AM - 5:00 PM
                         </p>
                     </div>
                     
@@ -476,7 +476,7 @@
             const manualDownload = document.getElementById('manualDownload');
             
             function downloadVCF() {
-                const vcfData = `BEGIN:VCARD
+                const vcfData = `BEGIN:VCARD              
 VERSION:3.0
 N:Bali-Banini;Eselase;;;
 FN:Eselase Bali-Banini
@@ -486,7 +486,7 @@ TEL;TYPE=WORK,VOICE:+233245332299
 EMAIL;TYPE=PREF,INTERNET:bali-banini.eselase@moc.gov.gh
 URL:https://www.linkedin.com/in/eselase-bali-banini-8675ba271/?originalSubdomain=gh
 ADR;TYPE=WORK:;;Ministry of Communication, Digital Technology & Innovation;Accra;;GA-123-4567;Ghana
-PHOTO;VALUE=URL:https://yourdomain.com/IMG_2741-2.jpg
+PHOTO;TYPE=JPEG;VALUE=URI:https://sela2020.github.io/NeganCalc/IMG_2741-2.jpg
 item1.URL;TYPE=pref:https://maps.app.goo.gl/Prsdx6suPyVVFZJ8A
 item1.X-ABLabel:Location
 REV:${new Date().toISOString()}
