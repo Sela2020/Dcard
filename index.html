@@ -445,45 +445,41 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Flip card functionality
-            const card = document.getElementById('card');
-            const flipBtn = document.getElementById('flipBtn');
-            const flipBackBtn = document.getElementById('flipBackBtn');
-            
-            flipBtn.addEventListener('click', function() {
-                card.classList.add('flipped');
-            });
-            
-            flipBackBtn.addEventListener('click', function() {
-                card.classList.remove('flipped');
-            });
-            
-            // QR Code Modal
-            const qrModal = document.getElementById('qrModal');
-            const qrBtn = document.getElementById('qrBtn');
-            const closeQrModal = document.getElementById('closeQrModal');
-            
-            qrBtn.addEventListener('click', function() {
-                qrModal.classList.remove('hidden');
-            });
-            
-            closeQrModal.addEventListener('click', function() {
-                qrModal.classList.add('hidden');
-            });
-            
-            qrModal.addEventListener('click', function(e) {
-                if (e.target === qrModal) {
-                    qrModal.classList.add('hidden');
-                }
-            });
-            
-            // Download VCF functionality
-            const downloadModal = document.getElementById('downloadModal');
-            const closeModal = document.getElementById('closeModal');
-            const manualDownload = document.getElementById('manualDownload');
-            
-            function downloadVCF() {
-                const vcfData = `BEGIN:VCARD              
+    // Flip card functionality
+    const card = document.getElementById('card');
+    const flipBtn = document.getElementById('flipBtn');
+    const flipBackBtn = document.getElementById('flipBackBtn');
+    
+    flipBtn.addEventListener('click', function() {
+        card.classList.add('flipped');
+    });
+    
+    flipBackBtn.addEventListener('click', function() {
+        card.classList.remove('flipped');
+    });
+    
+    // QR Code Modal
+    const qrModal = document.getElementById('qrModal');
+    const qrBtn = document.getElementById('qrBtn');
+    const closeQrModal = document.getElementById('closeQrModal');
+    
+    qrBtn.addEventListener('click', function() {
+        qrModal.classList.remove('hidden');
+    });
+    
+    closeQrModal.addEventListener('click', function() {
+        qrModal.classList.add('hidden');
+    });
+    
+    qrModal.addEventListener('click', function(e) {
+        if (e.target === qrModal) {
+            qrModal.classList.add('hidden');
+        }
+    });
+    
+    // Download VCF functionality
+    function downloadVCF() {
+        const vcfData = `BEGIN:VCARD              
 VERSION:3.0
 N:Bali-Banini;Eselase;;;
 FN:Eselase Bali-Banini
@@ -493,63 +489,39 @@ TEL;TYPE=WORK,VOICE:+233245332299
 EMAIL;TYPE=PREF,INTERNET:bali-banini.eselase@moc.gov.gh
 URL:https://www.linkedin.com/in/eselase-bali-banini-8675ba271/?originalSubdomain=gh
 ADR;TYPE=WORK:;;Ministry of Communication, Digital Technology & Innovation;Accra;;GA-123-4567;Ghana
-PHOTO;VALUE=URI;TYPE=JPEG:IMG_2741-2.jpg
 item1.URL;TYPE=pref:https://maps.app.goo.gl/Prsdx6suPyVVFZJ8A
 item1.X-ABLabel:Location
 REV:${new Date().toISOString()}
 END:VCARD`;
-                
-                const blob = new Blob([vcfData], { type: 'text/vcard' });
-                const url = URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = 'Eselase_Bali-Banini.vcf';
-                
-                document.body.appendChild(a);
-                a.click();
-                
-                setTimeout(function() {
-                    document.body.removeChild(a);
-                    window.URL.revokeObjectURL(url);
-                }, 100);
-                
-                // Show modal if download didn't work after 3 seconds
-                setTimeout(function() {
-                    if (!document.querySelector('a[download="Eselase_Bali-Banini.vcf"]')) {
-                        downloadModal.classList.remove('hidden');
-                    }
-                }, 3000);
-            }
-            
-            // Manual download buttons
-            document.getElementById('saveContactBtn').addEventListener('click', downloadVCF);
-            document.getElementById('saveContactBtnBack').addEventListener('click', downloadVCF);
-            manualDownload.addEventListener('click', function() {
-                downloadVCF();
-                downloadModal.classList.add('hidden');
-            });
-            
-            // Close modal
-            closeModal.addEventListener('click', function() {
-                downloadModal.classList.add('hidden');
-            });
-            
-            // Close modal when clicking outside
-            downloadModal.addEventListener('click', function(e) {
-                if (e.target === downloadModal) {
-                    downloadModal.classList.add('hidden');
-                }
-            });
-            
-            // Auto-trigger VCF download on page load
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    downloadVCF();
-                }, 1000); // 1 second delay to allow page to fully load
-            });
-        });
+        
+        const blob = new Blob([vcfData], { type: 'text/vcard' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'Eselase_Bali-Banini.vcf';
+        
+        document.body.appendChild(a);
+        a.click();
+        
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 100);
+    }
+    
+    // Manual download buttons
+    document.getElementById('saveContactBtn').addEventListener('click', downloadVCF);
+    document.getElementById('saveContactBtnBack').addEventListener('click', downloadVCF);
+    
+    // Auto-trigger VCF download on page load
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            downloadVCF();
+        }, 1000); // 1 second delay to allow page to fully load
+    });
+});
     </script>
 
     <!-- Footer Container -->
