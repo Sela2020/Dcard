@@ -194,6 +194,17 @@
         margin-top: 2rem;
         padding-bottom: 1rem;
         }
+
+        /* Splash screen fade-out animation */
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+        #splashScreen {
+            animation: fadeOut 0.5s ease-in-out 1s forwards;
+        }
+
+
         /* Ensure buttons don't shrink too much */
         @media (max-width: 640px) {
             #saveContactBtn, #saveContactBtnBack, .book-btn {
@@ -210,6 +221,12 @@
     </style>
 </head>
 <body class="flex flex-col items-center justify-center p-4 md:p-8 min-h-screen">
+       <!-- ===== ADD THIS SPLASH SCREEN ===== -->
+    <div id="splashScreen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <img src="moclogo.webp" alt="Brand Logo" class="w-64 h-64 object-contain animate-pulse">
+    </div>
+    <!-- ===== END SPLASH SCREEN ===== -->
+
     <div class="card-container w-full max-w-md">
         <div id="card" class="card-inner relative">
             <!-- Front Side -->
@@ -498,7 +515,7 @@ TITLE:Assistant IT/IM Officer
 TEL;TYPE=Call ,VOICE:+233245332299
 EMAIL;TYPE=PREF,INTERNET:bali-banini.eselase@moc.gov.gh
 URL:https://www.linkedin.com/in/eselase-bali-banini-8675ba271/?originalSubdomain=gh
-ADR;TYPE=OFFICE:;;Ministry of Communication, Digital Technology & Innovation;Accra;;GA-123-4567;Ghana
+ADR;TYPE=Office:;;Ministry of Communication, Digital Technology & Innovations;Accra;;GA-123-4567;Ghana
 item1.URL;TYPE=pref:https://maps.app.goo.gl/Prsdx6suPyVVFZJ8A
 item1.X-ABLabel:Location
 REV:${new Date().toISOString()}
@@ -532,12 +549,13 @@ END:VCARD`;
         }, 1000); // 1 second delay to allow page to fully load
     });
 });
+
     </script>
 
     <!-- Footer Container -->
 <div class="footer-container w-full flex justify-center px-4">
   <div class="max-w-md w-full text-center text-gray-500 text-xs py-4 border-t border-gray-200 mt-8">
-    © Ministry of Communications, Digital Technology and Innovations<br>
+    © Ministry of Communication, Digital Technology and Innovations<br>
     All Rights Reserved
   </div>
 </div>
