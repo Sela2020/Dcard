@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
     <title>Digital Business Card | Eselase Bali-Banini</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Load Font Awesome efficiently -->
+<link rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+      crossorigin="anonymous" 
+      referrerpolicy="no-referrer" 
+      media="print" 
+      onload="this.media='all'">
+    <!-- Replace current font link with optimized version -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
         body {
             font-family: 'Poppins', sans-serif;
@@ -98,7 +109,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('https://moc.gov.gh/wp-content/uploads/2023/03/MOC-Card-Back.png'); /* Replace with your logo path */
+            background-image: url('moclogo.webp'); /* Replace with your logo path */
             background-size: 60%; /* Adjust size as needed */
             background-position: center;
             background-repeat: no-repeat;
@@ -214,7 +225,7 @@
                     
                     <div class="flex justify-center floating">
                         <div class="relative">
-                            <img src="IMG_2741-2.jpg" 
+                            <img src="IMG_2741-2.webp" 
                                  alt="Profile Image" 
                                  class="profile-image w-32 h-32 rounded-full object-cover z-10 relative">
                             <div class="absolute inset-0 rounded-full bg-blue-500 opacity-10 -z-10 pulse" style="top: -5px; left: -5px; right: -5px; bottom: -5px;"></div>
@@ -410,7 +421,7 @@
                 <!-- Placeholder for QR code - in a real implementation, you would generate a QR code -->
                 <div class="w-48 h-48 bg-gray-100 flex items-center justify-center text-gray-400">
                    <!-- <i class="fas fa-qrcode text-6xl"></i> -->
-                    <img src="qr-001EKB.png" alt="QR Code">
+                    <img src="qr-001EKB.webp" alt="QR Code">
                 </div>
             </div>
             <p class="text-center text-sm text-gray-600 mt-4">Scan this QR code to save my contact</p>
