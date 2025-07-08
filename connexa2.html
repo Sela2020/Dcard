@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexa | Premium Digital Business Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+            }
+        }
+        
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .marquee-inner {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        
+        .marquee:hover .marquee-inner {
+            animation-play-state: paused;
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .service-card {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        
+        .service-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        
+        .service-card:hover .service-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .service-card-front, .service-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+        
+        .service-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .floating-label {
+            position: relative;
+        }
+        
+        .floating-input {
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            background: transparent;
+            padding: 16px 12px;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+        
+        .floating-input:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+        
+        .floating-label-text {
+            position: absolute;
+            top: 18px;
+            left: 12px;
+            color: #6b7280;
+            transition: all 0.2s;
+            pointer-events: none;
+        }
+        
+        .floating-input:focus + .floating-label-text,
+        .floating-input:not(:placeholder-shown) + .floating-label-text {
+            top: -8px;
+            left: 10px;
+            font-size: 12px;
+            background-color: white;
+            padding: 0 4px;
+            color: #6366f1;
+        }
+        
+        .chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #6366f1;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .chat-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .testimonial-carousel {
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+        
+        .testimonial-slide {
+            scroll-snap-align: start;
+            flex: 0 0 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-slide {
+                flex: 0 0 50%;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .testimonial-slide {
+                flex: 0 0 33.333%;
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        
+        .dark-mode .floating-input:focus + .floating-label-text,
+        .dark-mode .floating-input:not(:placeholder-shown) + .floating-label-text {
+            background-color: #1a1a1a;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
+        <div class="w-32 h-32 mb-4">
+            <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_usmfx6bp.json" background="transparent" speed="1" loop autoplay></lottie-player>
+        </div>
+        <p class="text-xl font-semibold">Loading Connexa...</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="Connexa BG.png" alt="Connexa Logo" class="h-10 w-10">
+                    <span class="ml-2 text-xl font-bold text-gray-900">Connexa</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="#features" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Features</a>
+                        <a href="#how-it-works" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">How It Works</a>
+                        <a href="#testimonials" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Testimonials</a>
+                        <a href="#pricing" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Pricing</a>
+                        <a href="#contact" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button id="dark-mode-toggle" class="p-2 rounded-full hover:bg-gray-100">
+                        <i class="fas fa-moon text-gray-700"></i>
+                    </button>
+                    <a href="#contact" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Get Started
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-indigo-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#features" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Features</a>
+                <a href="#how-it-works" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">How It Works</a>
+                <a href="#testimonials" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Testimonials</a>
+                <a href="#pricing" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Pricing</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <video class="hero-video" autoplay muted loop poster="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+            <source src="IMG_0923.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay absolute inset-0"></div>
+        <div class="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 animate-on-scroll" data-delay="0.1s">Redefine Your First Impression with Connexa</h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto animate-on-scroll" data-delay="0.3s">Digital cards that work harder—so you don't have to.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-on-scroll" data-delay="0.5s">
+                <a href="#contact" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 pulse">
+                    Get Your Card Now
+                </a>
+                <button id="demo-video-button" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg border border-white/30 shadow-lg transition-all duration-300 transform hover:scale-105">
+                    Watch Demo
+                </button>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90">
+        <div class="relative w-full max-w-4xl mx-4">
+            <button id="close-modal" class="absolute -top-12 right-0 text-white hover:text-indigo-400">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="aspect-w-16 aspect-h-9">
+                <iframe id="modal-video" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Who We Are Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="mb-12 lg:mb-0 animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Team working" class="rounded-xl shadow-2xl w-full h-auto">
+                </div>
+                <div class="animate-on-scroll" data-delay="0.2s">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">More Than Just Digital Cards</h2>
+                    <p class="text-lg text-gray-600 mb-8">Connexa blends sleek design with smart technology to make networking effortless. Our platform transforms traditional business cards into powerful digital tools that create lasting connections.</p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                        <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                            <div class="text-3xl font-bold text-indigo-600 mb-2">1,800+</div>
+                            <div class="text-sm text-gray-600">Happy Clients</div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                            <div class="text-3xl font-bold text-indigo-600 mb-2">24/7</div>
+                            <div class="text-sm text-gray-600">Support</div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                            <div class="text-3xl font-bold text-indigo-600 mb-2">50+</div>
+                            <div class="text-sm text-gray-600">Partners</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
+                            <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                            <span class="text-sm font-medium">Instant Updates</span>
+                        </div>
+                        <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
+                            <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                            <span class="text-sm font-medium">Analytics Dashboard</span>
+                        </div>
+                        <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
+                            <div class="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
+                            <span class="text-sm font-medium">Multi-Device Sync</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Say Goodbye to Multiple Cards -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Say Goodbye to Multiple Cards</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">One digital card to rule them all. Update once, share everywhere.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <div class="bg-gray-50 p-8 rounded-2xl shadow-inner">
+                        <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_5tkzkblw.json" background="transparent" speed="1" style="width: 100%; height: auto;" loop autoplay></lottie-player>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll" data-delay="0.2s">
+                    <div class="space-y-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">One link, endless connections</h3>
+                                <p class="mt-2 text-gray-600">Share a single link that contains all your contact information, social profiles, and even portfolio items.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Update details instantly</h3>
+                                <p class="mt-2 text-gray-600">Changed your phone number or job title? Update it once and all your connections get the latest information automatically.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Track engagement analytics</h3>
+                                <p class="mt-2 text-gray-600">See who viewed your card, when they viewed it, and what information they accessed most.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Connexa?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">We outperform competitors in every category that matters</p>
+            </div>
+            
+            <div class="overflow-x-auto animate-on-scroll" data-delay="0.2s">
+                <table class="w-full bg-white rounded-lg overflow-hidden shadow-lg">
+                    <thead>
+                        <tr class="bg-indigo-600 text-white">
+                            <th class="py-4 px-6 text-left font-semibold">Feature</th>
+                            <th class="py-4 px-6 text-center font-semibold">Connexa</th>
+                            <th class="py-4 px-6 text-center font-semibold">Synk Card Tech</th>
+                            <th class="py-4 px-6 text-center font-semibold">digiCARD</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="py-4 px-6 font-medium">Custom Design</td>
+                            <td class="py-4 px-6 text-center text-green-600"><i class="fas fa-check-circle"></i></td>
+                            <td class="py-4 px-6 text-center text-gray-400"><i class="fas fa-times-circle"></i></td>
+                            <td class="py-4 px-6 text-center text-gray-400"><i class="fas fa-times-circle"></i></td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="py-4 px-6 font-medium">Analytics Dashboard</td>
+                            <td class="py-4 px-6 text-center text-green-600"><i class="fas fa-check-circle"></i></td>
+                            <td class="py-4 px-6 text-center text-yellow-500"><i class="fas fa-check-circle"></i></td>
+                            <td class="py-4 px-6 text-center text-gray-400"><i class="fas fa-times-circle"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-medium">Team Management</td>
+                            <td class="py-4 px-6 text-center text-green-600"><i class="fas fa-check-circle"></i></td>
+                            <td class="py-4 px-6 text-center text-gray-400"><i class="fas fa-times-circle"></i></td>
+                            <td class="py-4 px-6 text-center text-gray-400"><i class="fas fa-times-circle"></i></td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="py-4 px-6 font-medium">Custom Domain</td>
+                            <td class="py-4 px-6 text-center text-green-600"><i class="fas fa-check-circle"></i></td>
+                            <td class="py-4 px-6 text-center text-yellow-500"><i class="fas fa-check-circle"></i></td>
+                            <td class="py-4 px-6 text-center text-yellow-500"><i class="fas fa-check-circle"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6 font-medium">24/7 Support</td>
+                            <td class="py-4 px-6 text-center text-green-600"><i class="fas fa-check-circle"></i></td>
+                            <td class="py-4 px-6 text-center text-gray-400"><i class="fas fa-times-circle"></i></td>
+                            <td class="py-4 px-6 text-center text-yellow-500"><i class="fas fa-check-circle"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
+                <div class="flex items-center justify-center">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                    </div>
+                    <span class="ml-2 text-lg font-medium text-gray-900">Rated 4.7/5</span>
+                </div>
+            </div>
+            
+            <div class="relative animate-on-scroll" data-delay="0.2s">
+                <div class="testimonial-carousel flex overflow-x-auto snap-x snap-mandatory pb-8 -mx-4 px-4" style="scroll-snap-type: x mandatory;">
+                    <div class="testimonial-slide flex-shrink-0 px-4">
+                        <div class="bg-gray-50 p-8 rounded-xl h-full">
+                            <div class="flex items-center mb-6">
+                                <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/30.jpg" alt="Patience Addo">
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-900">Patience Addo</h4>
+                                    <p class="text-gray-600">Marketing Director</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 italic">"Connexa has completely transformed how I network. I no longer worry about running out of cards or having outdated information. The analytics help me understand who's interested in connecting."</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide flex-shrink-0 px-4">
+                        <div class="bg-gray-50 p-8 rounded-xl h-full">
+                            <div class="flex items-center mb-6">
+                                <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/men/80.jpg" alt="John Nyadeka">
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-900">John Nyadeka</h4>
+                                    <p class="text-gray-600">Tech Entrepreneur</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 italic">"As someone who's always on the move, Connexa's digital business card is a game-changer. I can update my information instantly and share it with anyone, anywhere. The custom domain option gives it a professional touch."</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide flex-shrink-0 px-4">
+                        <div class="bg-gray-50 p-8 rounded-xl h-full">
+                            <div class="flex items-center mb-6">
+                                <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/16.jpg" alt="Atsu Karl">
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-900">Atsu Karl</h4>
+                                    <p class="text-gray-600">Sales Executive</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 italic">"The team management features are incredible. We have 50+ sales reps, and Connexa makes it easy to maintain brand consistency while allowing personalization. Our lead conversion rate has improved significantly."</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide flex-shrink-0 px-4">
+                        <div class="bg-gray-50 p-8 rounded-xl h-full">
+                            <div class="flex items-center mb-6">
+                                <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/men/59.jpg" alt="Nathaniel Normanyo">
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-900">Nathaniel Normanyo</h4>
+                                    <p class="text-gray-600">Financial Consultant</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 italic">"I was skeptical at first, but Connexa's digital card has made networking so much more efficient. The ability to include links to my calendar for scheduling has saved me countless back-and-forth emails."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center mt-8 space-x-2">
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 focus:outline-none" aria-label="Slide 1"></button>
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 focus:outline-none" aria-label="Slide 2"></button>
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 focus:outline-none" aria-label="Slide 3"></button>
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 focus:outline-none" aria-label="Slide 4"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Showcase -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate-on-scroll">
+                <p class="text-sm font-semibold tracking-wider text-indigo-600 uppercase">Trusted by industry leaders</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Our Partners</h2>
+            </div>
+            
+            <div class="marquee animate-on-scroll" data-delay="0.2s">
+                <div class="marquee-inner py-6 flex items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="h-12 mx-8 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" class="h-8 mx-8 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="h-10 mx-8 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" class="h-10 mx-8 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Samsung_Logo.svg" alt="Samsung" class="h-8 mx-8 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Samsung_Logo.svg" alt="Samsung" class="h-8 mx-8 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Samsung_Logo.svg" alt="Samsung" class="h-8 mx-8 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Samsung_Logo.svg" alt="Samsung" class="h-8 mx-8 grayscale hover:grayscale-0 transition-all duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Simple, Transparent Pricing</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Choose the plan that fits your needs</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 animate-on-scroll" data-delay="0.2s">
+                <div class="service-card group">
+                    <div class="service-card-inner">
+                        <div class="service-card-front bg-gray-50 p-8 rounded-xl h-full flex flex-col">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Basic</h3>
+                            <p class="text-gray-600 mb-6">Perfect for individuals</p>
+                            <div class="mb-6">
+                                <span class="text-4xl font-bold text-gray-900">$9</span>
+                                <span class="text-gray-600">/month</span>
+                            </div>
+                            <ul class="space-y-3 mb-8 flex-grow">
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>1 Digital Card</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Basic Analytics</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>QR Code Download</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Email Support</span>
+                                </li>
+                            </ul>
+                            <a href="#contact" class="mt-auto w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-300">
+                                Get Started
+                            </a>
+                        </div>
+                        <div class="service-card-back bg-indigo-600 p-8 rounded-xl h-full flex flex-col justify-center items-center text-white">
+                            <h3 class="text-2xl font-bold mb-4">Best for Individuals</h3>
+                            <p class="text-center mb-6">Perfect for freelancers, consultants, and professionals who want a modern digital presence.</p>
+                            <p class="text-xl font-bold">Only $9/month</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card group">
+                    <div class="service-card-inner">
+                        <div class="service-card-front bg-gray-50 p-8 rounded-xl h-full flex flex-col border-2 border-indigo-500 relative">
+                            <div class="absolute top-0 right-0 bg-indigo-500 text-white px-3 py-1 text-xs font-bold rounded-bl-lg">POPULAR</div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
+                            <p class="text-gray-600 mb-6">For growing professionals</p>
+                            <div class="mb-6">
+                                <span class="text-4xl font-bold text-gray-900">$19</span>
+                                <span class="text-gray-600">/month</span>
+                            </div>
+                            <ul class="space-y-3 mb-8 flex-grow">
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Everything in Basic</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Advanced Analytics</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Custom Domain</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Priority Support</span>
+                                </li>
+                            </ul>
+                            <a href="#contact" class="mt-auto w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-300">
+                                Get Started
+                            </a>
+                        </div>
+                        <div class="service-card-back bg-indigo-700 p-8 rounded-xl h-full flex flex-col justify-center items-center text-white">
+                            <h3 class="text-2xl font-bold mb-4">Best for Professionals</h3>
+                            <p class="text-center mb-6">Ideal for executives, entrepreneurs, and professionals who need advanced features and analytics.</p>
+                            <p class="text-xl font-bold">Only $19/month</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card group">
+                    <div class="service-card-inner">
+                        <div class="service-card-front bg-gray-50 p-8 rounded-xl h-full flex flex-col">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                            <p class="text-gray-600 mb-6">For teams and organizations</p>
+                            <div class="mb-6">
+                                <span class="text-4xl font-bold text-gray-900">$49</span>
+                                <span class="text-gray-600">/month</span>
+                            </div>
+                            <ul class="space-y-3 mb-8 flex-grow">
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Everything in Pro</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Team Management</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Brand Customization</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Dedicated Account Manager</span>
+                                </li>
+                            </ul>
+                            <a href="#contact" class="mt-auto w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-300">
+                                Get Started
+                            </a>
+                        </div>
+                        <div class="service-card-back bg-indigo-800 p-8 rounded-xl h-full flex flex-col justify-center items-center text-white">
+                            <h3 class="text-2xl font-bold mb-4">Best for Teams</h3>
+                            <p class="text-center mb-6">Perfect for companies and organizations that need to manage multiple team members with centralized control.</p>
+                            <p class="text-xl font-bold">Only $49/month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Interactive Demo</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Experience Connexa in action</p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden animate-on-scroll" data-delay="0.2s">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Try It Yourself</h3>
+                        <p class="text-gray-600 mb-6">Drag the card to explore its interactive features. See how easy it is to share your information with just a tap.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-indigo-100 p-2 rounded-full">
+                                    <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <p class="ml-3 text-gray-700">Flip the card to see different information layouts</p>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-indigo-100 p-2 rounded-full">
+                                    <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15l8-8m0 0l-8-8m8 8H4"></path>
+                                    </svg>
+                                </div>
+                                <p class="ml-3 text-gray-700">Click buttons to experience interactive elements</p>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-indigo-100 p-2 rounded-full">
+                                    <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                    </svg>
+                                </div>
+                                <p class="ml-3 text-gray-700">See how information updates in real-time</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 bg-indigo-50 flex items-center justify-center p-8 md:p-12">
+                        <div class="relative w-64 h-96 mx-auto" id="demo-card-container">
+                            <div class="absolute inset-0 bg-white rounded-xl shadow-lg overflow-hidden transform transition-transform duration-500" id="demo-card">
+                                <div class="h-full flex flex-col">
+                                    <div class="bg-indigo-600 p-6 text-white">
+                                        <h4 class="text-xl font-bold">John Smith</h4>
+                                        <p class="text-indigo-200">Marketing Director</p>
+                                    </div>
+                                    <div class="p-6 flex-grow">
+                                        <div class="mb-4">
+                                            <p class="text-sm text-gray-500">Email</p>
+                                            <p class="text-gray-800">dsafasd</p>
+                                        </div>
+                                        <div class="mb-4">
+                                            <p class="text-sm text-gray-500">Phone</p>
+                                            <p class="text-gray-800">(+233) 0245332299</p>
+                                        </div>
+                                        <div class="mb-4">
+                                            <p class="text-sm text-gray-500">Company</p>
+                                            <p class="text-gray-800">Connexa Inc.</p>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 bg-gray-50 flex justify-center space-x-4">
+                                        <button class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center hover:bg-indigo-200 transition-colors">
+                                            <i class="fab fa-linkedin-in"></i>
+                                        </button>
+                                        <button class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center hover:bg-indigo-200 transition-colors">
+                                            <i class="fab fa-twitter"></i>
+                                        </button>
+                                        <button class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center hover:bg-indigo-200 transition-colors">
+                                            <i class="fas fa-globe"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-indigo-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Elevate Your Networking?</h2>
+                <p class="text-xl max-w-3xl mx-auto">Get in touch with our team to create your custom digital business card</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 animate-on-scroll" data-delay="0.2s">
+                <div>
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="floating-label">
+                                <input type="text" id="first-name" class="floating-input w-full" placeholder=" ">
+                                <label for="first-name" class="floating-label-text">First Name</label>
+                            </div>
+                            <div class="floating-label">
+                                <input type="text" id="last-name" class="floating-input w-full" placeholder=" ">
+                                <label for="last-name" class="floating-label-text">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="floating-label">
+                            <input type="email" id="email" class="floating-input w-full" placeholder=" ">
+                            <label for="email" class="floating-label-text">Email Address</label>
+                        </div>
+                        <div class="floating-label">
+                            <input type="tel" id="phone" class="floating-input w-full" placeholder=" ">
+                            <label for="phone" class="floating-label-text">Phone Number</label>
+                        </div>
+                        <div class="floating-label">
+                            <select id="interest" class="floating-input w-full" placeholder=" ">
+                                <option value=""></option>
+                                <option value="basic">Basic Plan</option>
+                                <option value="pro">Pro Plan</option>
+                                <option value="enterprise">Enterprise Plan</option>
+                                <option value="custom">Custom Solution</option>
+                            </select>
+                            <label for="interest" class="floating-label-text">I'm interested in</label>
+                        </div>
+                        <div class="floating-label">
+                            <textarea id="message" class="floating-input w-full h-32" placeholder=" "></textarea>
+                            <label for="message" class="floating-label-text">Your Message</label>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full px-6 py-4 bg-white text-indigo-600 font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105">
+                                Submit Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div>
+                    <div class="bg-white/10 p-8 rounded-xl h-full">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-white/20 p-3 rounded-lg">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-medium">Phone</h4>
+                                    <p class="text-indigo-200">+233 24 533 2299</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-white/20 p-3 rounded-lg">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-medium">Email</h4>
+                                    <p class="text-indigo-200">hello@connexa.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-white/20 p-3 rounded-lg">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-medium">Office</h4>
+                                    <p class="text-indigo-200">Lapaz, Greater Accra<br>Ghana</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-medium mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Chat Bubble -->
+    <div class="chat-bubble">
+        <i class="fas fa-comment-dots text-2xl"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Product</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Templates</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Integrations</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Press</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">API Docs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Community</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">GDPR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <svg class="h-8 w-8 text-indigo-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 9H9.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M15 9H15.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="ml-2 text-xl font-bold">Connexa</span>
+                </div>
+                <div class="text-gray-400 text-sm">
+                    &copy; 2025 Connexa Technologies. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Wait for the page to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide loading screen
+            setTimeout(function() {
+                document.getElementById('loading-screen').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loading-screen').style.display = 'none';
+                }, 500);
+            }, 1500);
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-button').addEventListener('click', function() {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+
+            // Dark mode toggle
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            darkModeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                const icon = darkModeToggle.querySelector('i');
+                if (document.body.classList.contains('dark-mode')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+
+            // Video modal
+            const demoVideoButton = document.getElementById('demo-video-button');
+            const videoModal = document.getElementById('video-modal');
+            const closeModal = document.getElementById('close-modal');
+            
+            demoVideoButton.addEventListener('click', function() {
+                const videoIframe = document.getElementById('modal-video');
+                videoIframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
+                videoModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeModal.addEventListener('click', function() {
+                const videoIframe = document.getElementById('modal-video');
+                videoIframe.src = "";
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Testimonial carousel
+            const testimonialCarousel = document.querySelector('.testimonial-carousel');
+            const testimonialDots = document.querySelectorAll('.testimonial-dot');
+            let currentTestimonial = 0;
+            
+            function updateTestimonial(index) {
+                testimonialCarousel.scrollTo({
+                    left: testimonialCarousel.children[index].offsetLeft,
+                    behavior: 'smooth'
+                });
+                
+                testimonialDots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.remove('bg-gray-300');
+                        dot.classList.add('bg-indigo-600');
+                    } else {
+                        dot.classList.add('bg-gray-300');
+                        dot.classList.remove('bg-indigo-600');
+                    }
+                });
+                
+                currentTestimonial = index;
+            }
+            
+            testimonialDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => updateTestimonial(index));
+            });
+            
+            // Auto-rotate testimonials
+            setInterval(() => {
+                const nextTestimonial = (currentTestimonial + 1) % testimonialDots.length;
+                updateTestimonial(nextTestimonial);
+            }, 5000);
+
+            // Demo card interaction
+            const demoCard = document.getElementById('demo-card');
+            if (demoCard) {
+                demoCard.addEventListener('click', function() {
+                    this.classList.toggle('rotate-y-180');
+                });
+            }
+
+            // Chat bubble
+            const chatBubble = document.querySelector('.chat-bubble');
+            if (chatBubble) {
+                chatBubble.addEventListener('click', function() {
+                    // In a real implementation, this would open a chat widget
+                    alert('Chat support will open here in the full implementation!');
+                });
+            }
+
+            // Animate on scroll
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            
+            function checkScroll() {
+                animateElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Check on load
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+
+            // Initialize GSAP animations
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate hero elements
+            gsap.from('.hero h1', {
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top center',
+                    toggleActions: 'play none none none'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.3
+            });
+            
+            gsap.from('.hero p', {
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top center',
+                    toggleActions: 'play none none none'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.5
+            });
+            
+            gsap.from('.hero a', {
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top center',
+                    toggleActions: 'play none none none'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.7,
+                stagger: 0.2
+            });
+        });
+    </script>
+</body>
+</html>
