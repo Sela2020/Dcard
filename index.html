@@ -103,6 +103,14 @@
             align-items: stretch;
         }
 
+        .service-card-front {
+            min-height: 100%;
+        }
+
+        .absolute.top-0.right-0 {
+            z-index: 10;
+        }
+
         .service-card-back {
             transform: rotateY(180deg);
         }
@@ -215,6 +223,37 @@
         .rotate-y-180 {
             transform: rotateY(180deg);
         }
+
+/* Mobile-specific adjustments */
+@media (max-width: 767px) {
+    .service-card {
+        margin-bottom: 2rem; /* Add spacing between stacked cards */
+        height: auto; /* Allow natural height on mobile */
+    }
+    
+    .service-card-inner {
+        height: auto; /* Allow natural height on mobile */
+        min-height: 400px; /* Set a minimum height for consistency */
+    }
+    
+    .service-card-front, 
+    .service-card-back {
+        position: relative; /* Change to relative for mobile */
+        height: auto;
+        transform: none !important; /* Disable flip on mobile */
+        backface-visibility: visible;
+    }
+    
+    .service-card-back {
+        display: none; /* Hide back card on mobile */
+    }
+    
+    /* Show all cards in single column */
+    .grid.grid-cols-1 {
+        display: flex;
+        flex-direction: column;
+    }
+}
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -1228,6 +1267,27 @@ s1.charset='UTF-8';
 s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
+
+
+
+// Add this to your existing JavaScript
+function checkMobileLayout() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    const isMobile = window.innerWidth < 768;
+    
+    serviceCards.forEach(card => {
+        if (isMobile) {
+            card.classList.remove('group');
+            card.querySelector('.service-card-inner').style.transform = 'none';
+        } else {
+            card.classList.add('group');
+        }
+    });
+}
+
+// Run on load and resize
+window.addEventListener('load', checkMobileLayout);
+window.addEventListener('resize', checkMobileLayout);
 </script>
 <!--End of Tawk.to Script-->
 </body>
