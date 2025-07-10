@@ -75,30 +75,38 @@
             perspective: 1000px;
             transform-style: preserve-3d;
             transition: transform 0.6s;
+            height: 100%; /* Add this */
         }
-        
+
         .service-card-inner {
             position: relative;
             width: 100%;
-            height: 100%;
+            height: 100%; /* Ensure this is set */
             transform-style: preserve-3d;
             transition: transform 0.6s;
         }
-        
+
         .service-card:hover .service-card-inner {
             transform: rotateY(180deg);
         }
-        
+
         .service-card-front, .service-card-back {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
+            top: 0;
+            left: 0; 
         }
-        
+
+        .grid.md\:grid-cols-3 {
+            align-items: stretch;
+        }
+
         .service-card-back {
             transform: rotateY(180deg);
         }
+
         
         .floating-label {
             position: relative;
@@ -202,6 +210,11 @@
         .dark-mode .floating-input:not(:placeholder-shown) + .floating-label-text {
             background-color: #1a1a1a;
         }
+
+        /* Added missing rotate-y-180 class */
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -264,11 +277,13 @@
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
         <video class="hero-video" autoplay muted loop poster="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
             <source src="IMG_0931.MP4" type="video/mp4">
+            <!-- Added fallback text -->
+            Your browser does not support the video tag.
         </video>
         <div class="hero-overlay absolute inset-0"></div>
         <div class="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
             <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 animate-on-scroll" data-delay="0.1s">Redefine Your First Impression with Connexa</h1>
-            <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto animate-on-scroll" data-delay="0.3s">Digital cards that work harder—so you don't have to.</p>
+            <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto animate-on-scroll" data-delay="0.3s">With Connexa, your digital card speaks before you do</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4 animate-on-scroll" data-delay="0.5s">
                 <a href="#contact" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 pulse">
                     Get Your Card Now
@@ -295,9 +310,10 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
-            <div class="aspect-w-16 aspect-h-9">
-                <iframe id="modal-video" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
+            <video id="modal-video" class="w-full h-auto max-h-screen" controls autoplay>
+                <source src="IMG_0931.MP4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 
@@ -334,7 +350,7 @@
                         </div>
                         <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
                             <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
-                            <span class="text-sm font-medium">Analytics Dashboard</span>
+                            <span class="text-sm font-medium">Seamless Sharing</span>
                         </div>
                         <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
                             <div class="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
@@ -402,7 +418,7 @@
                             </div>
                             <div class="ml-4">
                                 <h3 class="text-lg font-medium text-gray-900">Curated Profile Management</h3>
-                                <p class="mt-2 text-gray-600">Your Connexa card stays current and professional. Whenever your details change, simply notify us, we’ll ensure your profile is updated with precision and care.</p>
+                                <p class="mt-2 text-gray-600">Your Connexa card stays current and professional. Whenever your details change, simply notify us, we'll ensure your profile is updated with precision and care.</p>
                             </div>
                         </div>
                         
@@ -445,13 +461,13 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         <tr>
-                            <td class="py-4 px-6 font-medium">Custom Design</td>
+                            <td class="py-4 px-6 font-medium">Mobile Friendly</td>
                             <td class="py-4 px-6 text-center text-green-600"><i class="fas fa-check-circle"></i></td>
                             <td class="py-4 px-6 text-center text-gray-400"><i class="fas fa-times-circle"></i></td>
                             <td class="py-4 px-6 text-center text-gray-400"><i class="fas fa-times-circle"></i></td>
                         </tr>
                         <tr class="bg-gray-50">
-                            <td class="py-4 px-6 font-medium">Analytics Dashboard</td>
+                            <td class="py-4 px-6 font-medium">Easy Updates</td>
                             <td class="py-4 px-6 text-center text-green-600"><i class="fas fa-check-circle"></i></td>
                             <td class="py-4 px-6 text-center text-yellow-500"><i class="fas fa-check-circle"></i></td>
                             <td class="py-4 px-6 text-center text-gray-400"><i class="fas fa-times-circle"></i></td>
@@ -463,7 +479,7 @@
                             <td class="py-4 px-6 text-center text-gray-400"><i class="fas fa-times-circle"></i></td>
                         </tr>
                         <tr class="bg-gray-50">
-                            <td class="py-4 px-6 font-medium">Custom Domain</td>
+                            <td class="py-4 px-6 font-medium">Tap to Share</td>
                             <td class="py-4 px-6 text-center text-green-600"><i class="fas fa-check-circle"></i></td>
                             <td class="py-4 px-6 text-center text-yellow-500"><i class="fas fa-check-circle"></i></td>
                             <td class="py-4 px-6 text-center text-yellow-500"><i class="fas fa-check-circle"></i></td>
@@ -600,15 +616,15 @@
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">Choose the plan that fits your needs</p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8 animate-on-scroll" data-delay="0.2s">
+            <div class="grid md:grid-cols-3 gap-8 animate-on-scroll" data-delay="0.2s" style="align-items: stretch;">
                 <div class="service-card group">
                     <div class="service-card-inner">
                         <div class="service-card-front bg-gray-50 p-8 rounded-xl h-full flex flex-col">
                             <h3 class="text-2xl font-bold text-gray-900 mb-2">Basic</h3>
                             <p class="text-gray-600 mb-6">Perfect for individuals</p>
                             <div class="mb-6">
-                                <span class="text-4xl font-bold text-gray-900">$9</span>
-                                <span class="text-gray-600">/month</span>
+                                <span class="text-4xl font-bold text-gray-900">GH₵399</span>
+                                <span class="text-gray-600">one-time payment</span>
                             </div>
                             <ul class="space-y-3 mb-8 flex-grow">
                                 <li class="flex items-center">
@@ -643,7 +659,7 @@
                         <div class="service-card-back bg-indigo-600 p-8 rounded-xl h-full flex flex-col justify-center items-center text-white">
                             <h3 class="text-2xl font-bold mb-4">Best for Individuals</h3>
                             <p class="text-center mb-6">Perfect for freelancers, consultants, and professionals who want a modern digital presence.</p>
-                            <p class="text-xl font-bold">Only $9/month</p>
+                            <p class="text-xl font-bold">Only GH₵399</p>
                         </div>
                     </div>
                 </div>
@@ -655,8 +671,8 @@
                             <h3 class="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
                             <p class="text-gray-600 mb-6">For growing professionals</p>
                             <div class="mb-6">
-                                <span class="text-4xl font-bold text-gray-900">$19</span>
-                                <span class="text-gray-600">/month</span>
+                                <span class="text-4xl font-bold text-gray-900">GH₵599</span>
+                                <span class="text-gray-600">one-time payment</span>
                             </div>
                             <ul class="space-y-3 mb-8 flex-grow">
                                 <li class="flex items-center">
@@ -691,7 +707,7 @@
                         <div class="service-card-back bg-indigo-700 p-8 rounded-xl h-full flex flex-col justify-center items-center text-white">
                             <h3 class="text-2xl font-bold mb-4">Best for Professionals</h3>
                             <p class="text-center mb-6">Ideal for executives, entrepreneurs, and professionals who need advanced features and analytics.</p>
-                            <p class="text-xl font-bold">Only $19/month</p>
+                            <p class="text-xl font-bold">Only GH₵599 one-time payment</p>
                         </div>
                     </div>
                 </div>
@@ -702,8 +718,8 @@
                             <h3 class="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
                             <p class="text-gray-600 mb-6">For teams and organizations</p>
                             <div class="mb-6">
-                                <span class="text-4xl font-bold text-gray-900">$49</span>
-                                <span class="text-gray-600">/month</span>
+                                <span class="text-4xl font-bold text-gray-900">GH₵1099</span>
+                                <span class="text-gray-600">one-time payment</span>
                             </div>
                             <ul class="space-y-3 mb-8 flex-grow">
                                 <li class="flex items-center">
@@ -738,7 +754,7 @@
                         <div class="service-card-back bg-indigo-800 p-8 rounded-xl h-full flex flex-col justify-center items-center text-white">
                             <h3 class="text-2xl font-bold mb-4">Best for Teams</h3>
                             <p class="text-center mb-6">Perfect for companies and organizations that need to manage multiple team members with centralized control.</p>
-                            <p class="text-xl font-bold">Only $49/month</p>
+                            <p class="text-xl font-bold">Only GH₵1099</p>
                         </div>
                     </div>
                 </div>
@@ -945,6 +961,7 @@
             </div>
         </div>
     </section>
+
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -955,8 +972,7 @@
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Templates</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">
-                                                <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Integrations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Integrations</a></li>
                     </ul>
                 </div>
                 <div>
@@ -989,12 +1005,7 @@
             </div>
             <div class="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center mb-4 md:mb-0">
-                    <svg class="h-8 w-8 text-indigo-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9 9H9.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M15 9H15.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="logo.png" alt="Connexa Logo" class="h-10 w-10">
                     <span class="ml-2 text-xl font-bold">Connexa</span>
                 </div>
                 <div class="text-gray-400 text-sm">
@@ -1039,54 +1050,68 @@
             const demoVideoButton = document.getElementById('demo-video-button');
             const videoModal = document.getElementById('video-modal');
             const closeModal = document.getElementById('close-modal');
-            
-            demoVideoButton.addEventListener('click', function() {
-                const videoIframe = document.getElementById('modal-video');
-                videoIframe.src = "https://www.youtube.com/watch?v=1-qp3OSIdjI?autoplay=1";
-                videoModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            closeModal.addEventListener('click', function() {
-                const videoIframe = document.getElementById('modal-video');
-                videoIframe.src = "";
-                videoModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            });
+            const modalVideo = document.getElementById('modal-video');
 
+            if (demoVideoButton && videoModal && closeModal && modalVideo) {
+                demoVideoButton.addEventListener('click', function() {
+                    modalVideo.currentTime = 0; // Reset video to start
+                    videoModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                    modalVideo.play();
+                });
+                
+                closeModal.addEventListener('click', function() {
+                    modalVideo.pause();
+                    videoModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                });
+                
+                // Close modal when video ends
+                modalVideo.addEventListener('ended', function() {
+                    videoModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                });
+            }
             // Testimonial carousel
             const testimonialCarousel = document.querySelector('.testimonial-carousel');
             const testimonialDots = document.querySelectorAll('.testimonial-dot');
-            let currentTestimonial = 0;
             
-            function updateTestimonial(index) {
-                testimonialCarousel.scrollTo({
-                    left: testimonialCarousel.children[index].offsetLeft,
-                    behavior: 'smooth'
+            if (testimonialCarousel && testimonialDots.length > 0) {
+                let currentTestimonial = 0;
+                
+                function updateTestimonial(index) {
+                    const slides = testimonialCarousel.children;
+                    if (index >= slides.length) index = 0;
+                    if (index < 0) index = slides.length - 1;
+                    
+                    testimonialCarousel.scrollTo({
+                        left: slides[index].offsetLeft,
+                        behavior: 'smooth'
+                    });
+                    
+                    testimonialDots.forEach((dot, i) => {
+                        if (i === index) {
+                            dot.classList.remove('bg-gray-300');
+                            dot.classList.add('bg-indigo-600');
+                        } else {
+                            dot.classList.add('bg-gray-300');
+                            dot.classList.remove('bg-indigo-600');
+                        }
+                    });
+                    
+                    currentTestimonial = index;
+                }
+                
+                testimonialDots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => updateTestimonial(index));
                 });
                 
-                testimonialDots.forEach((dot, i) => {
-                    if (i === index) {
-                        dot.classList.remove('bg-gray-300');
-                        dot.classList.add('bg-indigo-600');
-                    } else {
-                        dot.classList.add('bg-gray-300');
-                        dot.classList.remove('bg-indigo-600');
-                    }
-                });
-                
-                currentTestimonial = index;
+                // Auto-rotate testimonials
+                setInterval(() => {
+                    const nextTestimonial = (currentTestimonial + 1) % testimonialDots.length;
+                    updateTestimonial(nextTestimonial);
+                }, 5000);
             }
-            
-            testimonialDots.forEach((dot, index) => {
-                dot.addEventListener('click', () => updateTestimonial(index));
-            });
-            
-            // Auto-rotate testimonials
-            setInterval(() => {
-                const nextTestimonial = (currentTestimonial + 1) % testimonialDots.length;
-                updateTestimonial(nextTestimonial);
-            }, 5000);
 
             // Demo card interaction
             const demoCard = document.getElementById('demo-card');
@@ -1141,7 +1166,7 @@
                         
                         // Close mobile menu if open
                         const mobileMenu = document.getElementById('mobile-menu');
-                        if (!mobileMenu.classList.contains('hidden')) {
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                             mobileMenu.classList.add('hidden');
                         }
                     }
@@ -1149,48 +1174,50 @@
             });
 
             // Initialize GSAP animations
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Animate hero elements
-            gsap.from('.hero h1', {
-                scrollTrigger: {
-                    trigger: '.hero',
-                    start: 'top center',
-                    toggleActions: 'play none none none'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                delay: 0.3
-            });
-            
-            gsap.from('.hero p', {
-                scrollTrigger: {
-                    trigger: '.hero',
-                    start: 'top center',
-                    toggleActions: 'play none none none'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                delay: 0.5
-            });
-            
-            gsap.from('.hero a', {
-                scrollTrigger: {
-                    trigger: '.hero',
-                    start: 'top center',
-                    toggleActions: 'play none none none'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                delay: 0.7,
-                stagger: 0.2
-            });
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                
+                // Animate hero elements
+                gsap.from('.hero h1', {
+                    scrollTrigger: {
+                        trigger: '.hero',
+                        start: 'top center',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    delay: 0.3
+                });
+                
+                gsap.from('.hero p', {
+                    scrollTrigger: {
+                        trigger: '.hero',
+                        start: 'top center',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    delay: 0.5
+                });
+                
+                gsap.from('.hero a', {
+                    scrollTrigger: {
+                        trigger: '.hero',
+                        start: 'top center',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    delay: 0.7,
+                    stagger: 0.2
+                });
+            }
         });
     </script>
-    <!--Start of Tawk.to Script-->
+<!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
