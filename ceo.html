@@ -12,7 +12,10 @@
     emailjs.init('UglT8dhsVZpukfTaK');
   })();
 </script>
-
+<script
+  src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js"
+  type="module"
+></script>
 
         <!-- Load Font Awesome efficiently -->
 <link rel="stylesheet" 
@@ -211,7 +214,7 @@
             to { opacity: 0; visibility: hidden; }
         }
         #splashScreen {
-            animation: fadeOut 0.5s ease-in-out 1s forwards;
+            animation: fadeOut 0.5s ease-in-out 8s forwards;
         }
 
 
@@ -327,7 +330,15 @@
 <body class="flex flex-col items-center justify-center p-4 md:p-8 min-h-screen">
        <!-- ===== ADD THIS SPLASH SCREEN ===== -->
     <div id="splashScreen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
-        <img src="Connexa.png" alt="Brand Logo" class="w-64 h-64 object-contain animate-pulse">
+                <dotlottie-wc
+  src="https://lottie.host/f50d53f2-ec8c-4f09-a41c-57109307901c/59afAzsfJp.lottie"
+  style="width: 300px;height: 300px"
+  class="w-64 h-64 object-contain animate-pulse"
+  speed="1"
+  autoplay
+  loop>
+</dotlottie-wc>
+         
     </div>
     <!-- ===== END SPLASH SCREEN ===== -->
 
