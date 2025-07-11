@@ -75,13 +75,13 @@
             perspective: 1000px;
             transform-style: preserve-3d;
             transition: transform 0.6s;
-            height: 100%; /* Add this */
+            height: 100%;
         }
 
         .service-card-inner {
             position: relative;
             width: 100%;
-            height: 100%; /* Ensure this is set */
+            height: 100%;
             transform-style: preserve-3d;
             transition: transform 0.6s;
         }
@@ -99,22 +99,17 @@
             left: 0; 
         }
 
-        .grid.md\:grid-cols-3 {
-            align-items: stretch;
-        }
-
         .service-card-front {
             min-height: 100%;
-        }
-
-        .absolute.top-0.right-0 {
-            z-index: 10;
         }
 
         .service-card-back {
             transform: rotateY(180deg);
         }
 
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
         
         .floating-label {
             position: relative;
@@ -186,6 +181,18 @@
             flex: 0 0 100%;
         }
         
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments */
         @media (min-width: 768px) {
             .testimonial-slide {
                 flex: 0 0 50%;
@@ -197,63 +204,57 @@
                 flex: 0 0 33.333%;
             }
         }
-        
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .dark-mode {
-            background-color: #1a1a1a;
-            color: #ffffff;
-        }
-        
-        .dark-mode .floating-input:focus + .floating-label-text,
-        .dark-mode .floating-input:not(:placeholder-shown) + .floating-label-text {
-            background-color: #1a1a1a;
-        }
 
-        /* Added missing rotate-y-180 class */
-        .rotate-y-180 {
-            transform: rotateY(180deg);
-        }
+        /* Mobile-specific adjustments */
+        @media (max-width: 767px) {
+            .service-card {
+                margin-bottom: 2rem;
+                height: auto;
+            }
+            
+            .service-card-inner {
+                height: auto;
+                min-height: 400px;
+            }
+            
+            .service-card-front, 
+            .service-card-back {
+                position: relative;
+                height: auto;
+                transform: none !important;
+                backface-visibility: visible;
+            }
+            
+            .service-card-back {
+                display: none;
+            }
+            
+            /* Show all cards in single column */
+            .grid.grid-cols-1 {
+                display: flex;
+                flex-direction: column;
+            }
 
-/* Mobile-specific adjustments */
-@media (max-width: 767px) {
-    .service-card {
-        margin-bottom: 2rem; /* Add spacing between stacked cards */
-        height: auto; /* Allow natural height on mobile */
-    }
-    
-    .service-card-inner {
-        height: auto; /* Allow natural height on mobile */
-        min-height: 400px; /* Set a minimum height for consistency */
-    }
-    
-    .service-card-front, 
-    .service-card-back {
-        position: relative; /* Change to relative for mobile */
-        height: auto;
-        transform: none !important; /* Disable flip on mobile */
-        backface-visibility: visible;
-    }
-    
-    .service-card-back {
-        display: none; /* Hide back card on mobile */
-    }
-    
-    /* Show all cards in single column */
-    .grid.grid-cols-1 {
-        display: flex;
-        flex-direction: column;
-    }
-}
+            /* Adjust hero section for mobile */
+            .hero h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            /* Make buttons full width on mobile */
+            .hero .flex-col a, .hero .flex-col button {
+                width: 100%;
+            }
+
+            /* Adjust form inputs for mobile */
+            .floating-input {
+                padding: 14px 10px;
+            }
+
+            .floating-label-text {
+                top: 16px;
+            }
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -283,9 +284,6 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <button id="dark-mode-toggle" class="p-2 rounded-full hover:bg-gray-100">
-                        <i class="fas fa-moon text-gray-700"></i>
-                    </button>
                     <a href="#contact" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Get Started
                     </a>
@@ -314,9 +312,8 @@
 
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
-        <video class="hero-video" autoplay muted loop poster="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
             <source src="IMG_0931.MP4" type="video/mp4">
-            <!-- Added fallback text -->
             Your browser does not support the video tag.
         </video>
         <div class="hero-overlay absolute inset-0"></div>
@@ -561,7 +558,6 @@
                     <span class="ml-2 text-lg font-medium text-gray-900">Rated 4.7/5</span>
                 </div>
             </div>
-            
             <div class="relative animate-on-scroll" data-delay="0.2s">
                 <div class="testimonial-carousel flex overflow-x-auto snap-x snap-mandatory pb-8 -mx-4 px-4" style="scroll-snap-type: x mandatory;">
                     <div class="testimonial-slide flex-shrink-0 px-4">
@@ -646,7 +642,6 @@
             </div>
         </div>
     </section>
-
     <!-- Services Section -->
     <section id="pricing" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -702,7 +697,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="service-card group">
                     <div class="service-card-inner">
                         <div class="service-card-front bg-gray-50 p-8 rounded-xl h-full flex flex-col border-2 border-indigo-500 relative">
@@ -750,7 +744,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="service-card group">
                     <div class="service-card-inner">
                         <div class="service-card-front bg-gray-50 p-8 rounded-xl h-full flex flex-col">
@@ -934,7 +927,6 @@
                         </div>
                     </form>
                 </div>
-                
                 <div>
                     <div class="bg-white/10 p-8 rounded-xl h-full">
                         <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
@@ -1055,240 +1047,349 @@
     </footer>
 
     <script>
-        // Wait for the page to load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hide loading screen
-            setTimeout(function() {
-                document.getElementById('loading-screen').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('loading-screen').style.display = 'none';
-                }, 500);
-            }, 1500);
+        // Main initialization function
+        function initPage() {
+            // Loading screen handling
+            const loadingScreen = document.getElementById('loading-screen');
+            
+            // Hide loading screen with fade out effect
+            function hideLoadingScreen() {
+                if (loadingScreen) {
+                    loadingScreen.style.transition = 'opacity 0.5s ease';
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }
+            }
 
             // Mobile menu toggle
-            document.getElementById('mobile-menu-button').addEventListener('click', function() {
-                const menu = document.getElementById('mobile-menu');
-                menu.classList.toggle('hidden');
-            });
-
-            // Dark mode toggle
-            const darkModeToggle = document.getElementById('dark-mode-toggle');
-            darkModeToggle.addEventListener('click', function() {
-                document.body.classList.toggle('dark-mode');
-                const icon = darkModeToggle.querySelector('i');
-                if (document.body.classList.contains('dark-mode')) {
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                } else {
-                    icon.classList.remove('fa-sun');
-                    icon.classList.add('fa-moon');
-                }
-            });
-
-            // Video modal
-            const demoVideoButton = document.getElementById('demo-video-button');
-            const videoModal = document.getElementById('video-modal');
-            const closeModal = document.getElementById('close-modal');
-            const modalVideo = document.getElementById('modal-video');
-
-            if (demoVideoButton && videoModal && closeModal && modalVideo) {
-                demoVideoButton.addEventListener('click', function() {
-                    modalVideo.currentTime = 0; // Reset video to start
-                    videoModal.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                    modalVideo.play();
-                });
+            function setupMobileMenu() {
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mobileMenu = document.getElementById('mobile-menu');
                 
-                closeModal.addEventListener('click', function() {
-                    modalVideo.pause();
-                    videoModal.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                });
-                
-                // Close modal when video ends
-                modalVideo.addEventListener('ended', function() {
-                    videoModal.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                });
-            }
-            // Testimonial carousel
-            const testimonialCarousel = document.querySelector('.testimonial-carousel');
-            const testimonialDots = document.querySelectorAll('.testimonial-dot');
-            
-            if (testimonialCarousel && testimonialDots.length > 0) {
-                let currentTestimonial = 0;
-                
-                function updateTestimonial(index) {
-                    const slides = testimonialCarousel.children;
-                    if (index >= slides.length) index = 0;
-                    if (index < 0) index = slides.length - 1;
-                    
-                    testimonialCarousel.scrollTo({
-                        left: slides[index].offsetLeft,
-                        behavior: 'smooth'
+                if (mobileMenuButton && mobileMenu) {
+                    mobileMenuButton.addEventListener('click', function() {
+                        mobileMenu.classList.toggle('hidden');
                     });
                     
-                    testimonialDots.forEach((dot, i) => {
-                        if (i === index) {
-                            dot.classList.remove('bg-gray-300');
-                            dot.classList.add('bg-indigo-600');
-                        } else {
-                            dot.classList.add('bg-gray-300');
-                            dot.classList.remove('bg-indigo-600');
+                    // Close menu when clicking on a link
+                    document.querySelectorAll('#mobile-menu a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            mobileMenu.classList.add('hidden');
+                        });
+                    });
+                }
+            }
+
+            // Video modal functionality
+            function setupVideoModal() {
+                const demoVideoButton = document.getElementById('demo-video-button');
+                const videoModal = document.getElementById('video-modal');
+                const closeModal = document.getElementById('close-modal');
+                const modalVideo = document.getElementById('modal-video');
+
+                if (demoVideoButton && videoModal && closeModal && modalVideo) {
+                    demoVideoButton.addEventListener('click', function() {
+                        modalVideo.currentTime = 0;
+                        videoModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                        modalVideo.play();
+                    });
+                    
+                    closeModal.addEventListener('click', function() {
+                        modalVideo.pause();
+                        videoModal.classList.add('hidden');
+                        document.body.style.overflow = 'auto';
+                    });
+                    
+                    // Close when clicking outside video
+                    videoModal.addEventListener('click', function(e) {
+                        if (e.target === videoModal) {
+                            modalVideo.pause();
+                            videoModal.classList.add('hidden');
+                            document.body.style.overflow = 'auto';
                         }
                     });
                     
-                    currentTestimonial = index;
+                    modalVideo.addEventListener('ended', function() {
+                        videoModal.classList.add('hidden');
+                        document.body.style.overflow = 'auto';
+                    });
                 }
+            }
+
+            // Testimonial carousel
+            function setupTestimonialCarousel() {
+                const testimonialCarousel = document.querySelector('.testimonial-carousel');
+                const testimonialDots = document.querySelectorAll('.testimonial-dot');
                 
-                testimonialDots.forEach((dot, index) => {
-                    dot.addEventListener('click', () => updateTestimonial(index));
-                });
-                
-                // Auto-rotate testimonials
-                setInterval(() => {
-                    const nextTestimonial = (currentTestimonial + 1) % testimonialDots.length;
-                    updateTestimonial(nextTestimonial);
-                }, 5000);
-            }
-
-            // Demo card interaction
-            const demoCard = document.getElementById('demo-card');
-            if (demoCard) {
-                demoCard.addEventListener('click', function() {
-                    this.classList.toggle('rotate-y-180');
-                });
-            }
-
-            // Chat bubble
-            const chatBubble = document.querySelector('.chat-bubble');
-            if (chatBubble) {
-                chatBubble.addEventListener('click', function() {
-                    // In a real implementation, this would open a chat widget
-                    alert('Chat support will open here in the full implementation!');
-                });
-            }
-
-            // Animate on scroll
-            const animateElements = document.querySelectorAll('.animate-on-scroll');
-            
-            function checkScroll() {
-                animateElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
+                if (testimonialCarousel && testimonialDots.length > 0) {
+                    let currentTestimonial = 0;
+                    let autoScrollInterval;
                     
-                    if (elementTop < windowHeight - 100) {
-                        element.classList.add('visible');
-                    }
-                });
-            }
-            
-            // Check on load
-            checkScroll();
-            
-            // Check on scroll
-            window.addEventListener('scroll', checkScroll);
-
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
+                    function updateTestimonial(index) {
+                        const slides = testimonialCarousel.children;
+                        if (index >= slides.length) index = 0;
+                        if (index < 0) index = slides.length - 1;
+                        
+                        testimonialCarousel.scrollTo({
+                            left: slides[index].offsetLeft,
                             behavior: 'smooth'
                         });
                         
-                        // Close mobile menu if open
-                        const mobileMenu = document.getElementById('mobile-menu');
-                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                            mobileMenu.classList.add('hidden');
-                        }
+                        testimonialDots.forEach((dot, i) => {
+                            if (i === index) {
+                                dot.classList.remove('bg-gray-300');
+                                dot.classList.add('bg-indigo-600');
+                            } else {
+                                dot.classList.add('bg-gray-300');
+                                dot.classList.remove('bg-indigo-600');
+                            }
+                        });
+                        
+                        currentTestimonial = index;
                     }
-                });
-            });
+                    
+                    // Start auto-scrolling
+                    function startAutoScroll() {
+                        autoScrollInterval = setInterval(() => {
+                            const nextTestimonial = (currentTestimonial + 1) % testimonialDots.length;
+                            updateTestimonial(nextTestimonial);
+                        }, 5000);
+                    }
+                    
+                    // Pause on hover
+                    testimonialCarousel.addEventListener('mouseenter', () => {
+                        clearInterval(autoScrollInterval);
+                    });
+                    
+                    testimonialCarousel.addEventListener('mouseleave', () => {
+                        startAutoScroll();
+                    });
+                    
+                    // Dot navigation
+                    testimonialDots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => {
+                            clearInterval(autoScrollInterval);
+                            updateTestimonial(index);
+                            startAutoScroll();
+                        });
+                    });
+                    
+                    // Start the carousel
+                    startAutoScroll();
+                }
+            }
 
-            // Initialize GSAP animations
-            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                gsap.registerPlugin(ScrollTrigger);
+            // Demo card interaction
+            function setupDemoCard() {
+                const demoCard = document.getElementById('demo-card');
+                if (demoCard) {
+                    demoCard.addEventListener('click', function() {
+                        this.classList.toggle('rotate-y-180');
+                    });
+                }
+            }
+
+            // Chat bubble functionality
+            function setupChatBubble() {
+                const chatBubble = document.querySelector('.chat-bubble');
+                if (chatBubble) {
+                    chatBubble.addEventListener('click', function() {
+                        // In a real implementation, this would open a chat widget
+                        alert('Chat support will open here in the full implementation!');
+                    });
+                }
+            }
+
+            // Animate on scroll functionality
+            function setupScrollAnimations() {
+                const animateElements = document.querySelectorAll('.animate-on-scroll');
                 
-                // Animate hero elements
-                gsap.from('.hero h1', {
-                    scrollTrigger: {
-                        trigger: '.hero',
-                        start: 'top center',
-                        toggleActions: 'play none none none'
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 1,
-                    delay: 0.3
-                });
+                function checkScroll() {
+                    animateElements.forEach(element => {
+                        const elementTop = element.getBoundingClientRect().top;
+                        const windowHeight = window.innerHeight;
+                        
+                        if (elementTop < windowHeight - 100) {
+                            element.classList.add('visible');
+                        }
+                    });
+                }
                 
-                gsap.from('.hero p', {
-                    scrollTrigger: {
-                        trigger: '.hero',
-                        start: 'top center',
-                        toggleActions: 'play none none none'
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 1,
-                    delay: 0.5
-                });
+                // Check on load
+                checkScroll();
                 
-                gsap.from('.hero a', {
-                    scrollTrigger: {
-                        trigger: '.hero',
-                        start: 'top center',
-                        toggleActions: 'play none none none'
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 1,
-                    delay: 0.7,
-                    stagger: 0.2
+                // Check on scroll with throttle
+                let isScrolling;
+                window.addEventListener('scroll', function() {
+                    window.clearTimeout(isScrolling);
+                    isScrolling = setTimeout(checkScroll, 50);
+                }, false);
+            }
+
+            // Smooth scrolling for anchor links
+            function setupSmoothScrolling() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        const targetId = this.getAttribute('href');
+                        if (targetId === '#') return;
+                        
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                            
+                            // Close mobile menu if open
+                            const mobileMenu = document.getElementById('mobile-menu');
+                            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                                mobileMenu.classList.add('hidden');
+                            }
+                        }
+                    });
                 });
             }
-        });
-    </script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/686ef31018d1441915016824/1ivomav0f';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
 
+            // GSAP animations
+            function setupGSAPAnimations() {
+                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                    gsap.registerPlugin(ScrollTrigger);
+                    
+                    // Animate hero elements
+                    gsap.from('.hero h1', {
+                        scrollTrigger: {
+                            trigger: '.hero',
+                            start: 'top center',
+                            toggleActions: 'play none none none'
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
+                        delay: 0.3
+                    });
+                    
+                    gsap.from('.hero p', {
+                        scrollTrigger: {
+                            trigger: '.hero',
+                            start: 'top center',
+                            toggleActions: 'play none none none'
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
+                        delay: 0.5
+                    });
+                    
+                    gsap.from('.hero a', {
+                        scrollTrigger: {
+                            trigger: '.hero',
+                            start: 'top center',
+                            toggleActions: 'play none none none'
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
+                        delay: 0.7,
+                        stagger: 0.2
+                    });
+                }
+            }
 
+            // Mobile layout adjustments
+            function setupMobileLayout() {
+                function checkMobileLayout() {
+                    const serviceCards = document.querySelectorAll('.service-card');
+                    const isMobile = window.innerWidth < 768;
+                    
+                    serviceCards.forEach(card => {
+                        if (isMobile) {
+                            card.classList.remove('group');
+                            const inner = card.querySelector('.service-card-inner');
+                            if (inner) inner.style.transform = 'none';
+                        } else {
+                            card.classList.add('group');
+                        }
+                    });
+                }
 
-// Add this to your existing JavaScript
-function checkMobileLayout() {
-    const serviceCards = document.querySelectorAll('.service-card');
-    const isMobile = window.innerWidth < 768;
-    
-    serviceCards.forEach(card => {
-        if (isMobile) {
-            card.classList.remove('group');
-            card.querySelector('.service-card-inner').style.transform = 'none';
-        } else {
-            card.classList.add('group');
+                // Run on load and resize
+                checkMobileLayout();
+                window.addEventListener('resize', checkMobileLayout);
+            }
+
+            // Form validation
+            function setupFormValidation() {
+                const form = document.querySelector('form');
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        // Basic validation - check required fields
+                        const requiredFields = form.querySelectorAll('[required]');
+                        let isValid = true;
+                        
+                        requiredFields.forEach(field => {
+                            if (!field.value.trim()) {
+                                isValid = false;
+                                field.classList.add('border-red-500');
+                            } else {
+                                field.classList.remove('border-red-500');
+                            }
+                        });
+                        
+                        if (isValid) {
+                            // Form is valid - submit it (in a real implementation)
+                            alert('Form submitted successfully!');
+                            form.reset();
+                        } else {
+                            alert('Please fill in all required fields.');
+                        }
+                    });
+                }
+            }
+
+            // Initialize all functionality
+            function initializeAll() {
+                setupMobileMenu();
+                setupVideoModal();
+                setupTestimonialCarousel();
+                setupDemoCard();
+                setupChatBubble();
+                setupScrollAnimations();
+                setupSmoothScrolling();
+                setupGSAPAnimations();
+                setupMobileLayout();
+                setupFormValidation();
+                
+                // Hide loading screen after all initialization is complete
+                setTimeout(hideLoadingScreen, 500);
+            }
+
+            // Start initialization
+            initializeAll();
         }
-    });
-}
 
-// Run on load and resize
-window.addEventListener('load', checkMobileLayout);
-window.addEventListener('resize', checkMobileLayout);
-</script>
-<!--End of Tawk.to Script-->
+        // Start the page when DOM is ready
+        document.addEventListener('DOMContentLoaded', initPage);
+
+        // Fallback in case DOMContentLoaded doesn't fire
+        setTimeout(initPage, 3000);
+
+        // Tawk.to chat integration
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/686ef31018d1441915016824/1ivomav0f';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
 </body>
 </html>
