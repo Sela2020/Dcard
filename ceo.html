@@ -858,19 +858,53 @@ END:VCARD`;
                     message: formData.message
                 })
             ])
-            .then(() => {
-                alert('Thank you! A confirmation has been sent to your email.');
-                contactForm.reset();
-                shareModal.classList.add('hidden');
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Message received, but confirmation failed to send.');
-            })
-            .finally(() => {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-            });
+                .then(() => {
+                    // Create the animation container
+                    const animationContainer = document.createElement('div');
+                    animationContainer.style.position = 'fixed';
+                    animationContainer.style.top = '0';
+                    animationContainer.style.left = '0';
+                    animationContainer.style.width = '100%';
+                    animationContainer.style.height = '100%';
+                    animationContainer.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    animationContainer.style.display = 'flex';
+                    animationContainer.style.flexDirection = 'column';
+                    animationContainer.style.justifyContent = 'center';
+                    animationContainer.style.alignItems = 'center';
+                    animationContainer.style.zIndex = '1000';
+                    
+                    // Create the Lottie animation
+                    const animation = document.createElement('dotlottie-wc');
+                    animation.src = 'https://lottie.host/a7dd171e-f8fe-4e1d-8aa2-383932458c73/dHkFhFU7fo.lottie';
+                    animation.style.width = '300px';
+                    animation.style.height = '300px';
+                    animation.speed = '1';
+                    animation.autoplay = true;
+                    
+                    // Create the text message
+                    const message = document.createElement('div');
+                    message.textContent = 'Thank you! A confirmation has been sent to your email.';
+                    message.style.color = 'white';
+                    message.style.fontSize = '1.5rem';
+                    message.style.marginTop = '20px';
+                    message.style.textAlign = 'center';
+                    message.style.maxWidth = '80%';
+                    
+                    // Add elements to container
+                    animationContainer.appendChild(animation);
+                    animationContainer.appendChild(message);
+                    
+                    // Add click-to-close functionality
+                    animationContainer.addEventListener('click', () => {
+                        document.body.removeChild(animationContainer);
+                    });
+                    
+                    // Add to document
+                    document.body.appendChild(animationContainer);
+                    
+                    contactForm.reset();
+                    shareModal.classList.add('hidden');
+                });
         });
     }
 });
