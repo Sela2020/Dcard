@@ -795,119 +795,138 @@ END:VCARD`;
     if (saveContactBtnBack) {
         saveContactBtnBack.addEventListener('click', downloadVCF);
     }
+// EmailJS and Share Modal functionality
+emailjs.init('UglT8dhsVZpukfTaK');
 
-    // EmailJS and Share Modal functionality
-    emailjs.init('UglT8dhsVZpukfTaK');
+const shareModal = document.getElementById('shareContactModal');
+const shareBtn = document.getElementById('shareContactBtn');
+const closeShareModal = document.getElementById('closeShareModal');
+const contactForm = document.getElementById('contactForm');
 
-    const shareModal = document.getElementById('shareContactModal');
-    const shareBtn = document.getElementById('shareContactBtn');
-    const closeShareModal = document.getElementById('closeShareModal');
-    const contactForm = document.getElementById('contactForm');
+if (shareBtn && shareModal && closeShareModal) {
+    shareBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        shareModal.classList.remove('hidden');
+    });
 
-    if (shareBtn && shareModal && closeShareModal) {
-        shareBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            shareModal.classList.remove('hidden');
-        });
+    closeShareModal.addEventListener('click', (e) => {
+        e.preventDefault();
+        shareModal.classList.add('hidden');
+    });
 
-        closeShareModal.addEventListener('click', (e) => {
-            e.preventDefault();
+    shareModal.addEventListener('click', (e) => {
+        if (e.target === shareModal) {
             shareModal.classList.add('hidden');
-        });
+        }
+    });
+}
 
-        shareModal.addEventListener('click', (e) => {
-            if (e.target === shareModal) {
-                shareModal.classList.add('hidden');
-            }
-        });
-    }
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
+        const formData = {
+            to_email: 'bselasi51@gmail.com',
+            from_name: this.from_name.value,
+            from_email: this.from_email.value,
+            from_phone: this.from_phone.value,
+            message: this.message.value,
+            visitor_email: this.from_email.value || 'bselasi51@gmail.com',
+            visitor_name: this.from_name.value,
+            visitor_phone: this.from_phone.value
+        };
+
+        Promise.all([
+            emailjs.send('default_service', 'template_w0z5fuo', {
+                to_email: formData.to_email,
+                from_name: formData.from_name,
+                from_email: formData.from_email,
+                from_phone: formData.from_phone,
+                message: formData.message
+            }),
+            emailjs.send('default_service', 'template_097gnvp', {
+                to_email: formData.from_email,
+                from_name: formData.from_name,
+                from_email: formData.from_email,
+                from_phone: formData.from_phone,
+                message: formData.message
+            })
+        ])
+        .then(() => {
+            // Create the animation container
+            const animationContainer = document.createElement('div');
+            animationContainer.id = 'lottie-container';
+            animationContainer.style.position = 'fixed';
+            animationContainer.style.top = '0';
+            animationContainer.style.left = '0';
+            animationContainer.style.width = '100%';
+            animationContainer.style.height = '100%';
+            animationContainer.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            animationContainer.style.display = 'flex';
+            animationContainer.style.flexDirection = 'column';
+            animationContainer.style.justifyContent = 'center';
+            animationContainer.style.alignItems = 'center';
+            animationContainer.style.zIndex = '10000';
+            animationContainer.style.overflow = 'hidden';
+            animationContainer.style.touchAction = 'none';
             
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
-
-            const formData = {
-                to_email: 'bselasi51@gmail.com',
-                from_name: this.from_name.value,
-                from_email: this.from_email.value,
-                from_phone: this.from_phone.value,
-                message: this.message.value,
-                visitor_email: this.from_email.value || 'bselasi51@gmail.com',
-                visitor_name: this.from_name.value,
-                visitor_phone: this.from_phone.value
-            };
-
-            Promise.all([
-                emailjs.send('default_service', 'template_w0z5fuo', {
-                    to_email: formData.to_email,
-                    from_name: formData.from_name,
-                    from_email: formData.from_email,
-                    from_phone: formData.from_phone,
-                    message: formData.message
-                }),
-                emailjs.send('default_service', 'template_097gnvp', {
-                    to_email: formData.from_email,
-                    from_name: formData.from_name,
-                    from_email: formData.from_email,
-                    from_phone: formData.from_phone,
-                    message: formData.message
-                })
-            ])
-                .then(() => {
-                    // Create the animation container
-                    const animationContainer = document.createElement('div');
-                    animationContainer.style.position = 'fixed';
-                    animationContainer.style.top = '0';
-                    animationContainer.style.left = '0';
-                    animationContainer.style.width = '100%';
-                    animationContainer.style.height = '100%';
-                    animationContainer.style.backgroundColor = 'rgba(0,0,0,0.5)';
-                    animationContainer.style.display = 'flex';
-                    animationContainer.style.flexDirection = 'column';
-                    animationContainer.style.justifyContent = 'center';
-                    animationContainer.style.alignItems = 'center';
-                    animationContainer.style.zIndex = '1000';
-                    
-                    // Create the Lottie animation
-                    const animation = document.createElement('dotlottie-wc');
-                    animation.src = 'https://lottie.host/a7dd171e-f8fe-4e1d-8aa2-383932458c73/dHkFhFU7fo.lottie';
-                    animation.style.width = '300px';
-                    animation.style.height = '300px';
-                    animation.speed = '1';
-                    animation.autoplay = true;
-                    
-                    // Create the text message
-                    const message = document.createElement('div');
-                    message.textContent = 'Thank you! A confirmation has been sent to your email.';
-                    message.style.color = 'white';
-                    message.style.fontSize = '1.5rem';
-                    message.style.marginTop = '20px';
-                    message.style.textAlign = 'center';
-                    message.style.maxWidth = '80%';
-                    
-                    // Add elements to container
-                    animationContainer.appendChild(animation);
-                    animationContainer.appendChild(message);
-                    
-                    // Add click-to-close functionality
-                    animationContainer.addEventListener('click', () => {
-                        document.body.removeChild(animationContainer);
-                    });
-                    
-                    // Add to document
-                    document.body.appendChild(animationContainer);
-                    
-                    contactForm.reset();
-                    shareModal.classList.add('hidden');
-                });
+            // Create the Lottie animation
+            const animation = document.createElement('dotlottie-wc');
+            animation.src = 'https://lottie.host/a7dd171e-f8fe-4e1d-8aa2-383932458c73/dHkFhFU7fo.lottie';
+            animation.style.width = '100%';
+            animation.style.maxWidth = '300px';
+            animation.style.height = 'auto';
+            animation.style.aspectRatio = '1/1';
+            animation.speed = '1';
+            animation.autoplay = true;
+            
+            // Create the text message
+            const message = document.createElement('div');
+            message.textContent = 'Thank you! A confirmation has been sent to your email.';
+            message.style.color = 'white';
+            message.style.fontSize = 'clamp(1rem, 4vw, 1.5rem)';
+            message.style.marginTop = '20px';
+            message.style.textAlign = 'center';
+            message.style.maxWidth = '90%';
+            message.style.padding = '0 20px';
+            
+            // Add elements to container
+            animationContainer.appendChild(animation);
+            animationContainer.appendChild(message);
+            
+            // Add to document
+            document.body.appendChild(animationContainer);
+            
+            // Add click-to-close functionality
+            animationContainer.addEventListener('click', () => {
+                document.body.removeChild(animationContainer);
+            });
+            
+            // Auto-close after 5 seconds if user doesn't close it
+            setTimeout(() => {
+                if (document.body.contains(animationContainer)) {
+                    document.body.removeChild(animationContainer);
+                }
+            }, 5000);
+            
+            contactForm.reset();
+            shareModal.classList.add('hidden');
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Message received, but confirmation failed to send.');
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
         });
-    }
-});
+    });
+}
     </script>
 </body>
 </html>
