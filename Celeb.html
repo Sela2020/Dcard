@@ -10,19 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Pacifico&family=Satisfy&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        /* Loading Animation */
-        #loader {
+        
+        /* Split Screen Animation */
+        #split-screen-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: #000;
+            z-index: 9998;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
+            transition: opacity 1s ease-out;
         }
         
         /* Card Styles */
@@ -31,6 +32,7 @@
             width: 100%;
             max-width: 420px;
             height: 650px;
+            margin-bottom: 40px; /* Space for footer */
         }
         .card {
             transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -93,6 +95,7 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             transform: scale(0.9);
             transition: transform 0.5s ease, box-shadow 0.5s ease;
+            animation: pulse 2s infinite, float 6s ease-in-out infinite;
         }
         .profile-image:hover {
             transform: scale(0.95);
@@ -111,6 +114,14 @@
         }
         
         /* Social Icons */
+        .social-container {
+            margin: 20px 30px; /* Added margin for spacing */
+            padding: 15px 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
         .social-icon {
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             transform: translateY(0) rotate(0deg);
@@ -204,12 +215,40 @@
             100% { transform: scale(1); }
         }
         
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(255,255,255,0.5); }
+            50% { box-shadow: 0 0 20px rgba(255,255,255,0.9); }
+            100% { box-shadow: 0 0 5px rgba(255,255,255,0.5); }
+        }
+        
         .floating {
             animation: float 4s ease-in-out infinite;
         }
         
         .pulse-animation {
             animation: pulse 2s infinite;
+        }
+        
+        .bounce-animation {
+            animation: bounce 2s infinite;
+        }
+        
+        .rotate-animation {
+            animation: rotate 8s linear infinite;
+        }
+        
+        .glow-animation {
+            animation: glow 3s infinite;
         }
         
         /* Modal */
@@ -313,14 +352,44 @@
             0% { transform: scale(1); opacity: 1; }
             100% { transform: scale(2); opacity: 0; }
         }
+        
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            font-size: 12px;
+            z-index: 100;
+        }
+        
+        /* Sparkle Animation */
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnimation 1s ease-out forwards;
+        }
+        
+        @keyframes sparkleAnimation {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 overflow-hidden">
-    <!-- Loading Animation -->
-    <div id="loader">
-        <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_tsxbtr9d.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+    <!-- Split Screen Animation -->
+    <div id="split-screen-animation">
+        <lottie-player src="https://lottie.host/22fbe4d3-037d-4e29-a898-c79378dbeac7/etm3ZgK8RG.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
     </div>
-    
+  
     <!-- Confetti Container -->
     <div id="confetti-container"></div>
 
@@ -378,31 +447,33 @@
                 </div>
                 
                 <!-- Social Icons -->
-                <div class="flex justify-center flex-wrap mt-6 px-6 gap-3">
-                    <a href="#" class="social-icon bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-icon bg-gradient-to-r from-purple-600 to-pink-600 text-white w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-icon bg-black text-white w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fab fa-x-twitter"></i>
-                    </a>
-                    <a href="#" class="social-icon bg-red-600 text-white w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="#" class="social-icon bg-yellow-400 text-white w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fab fa-snapchat-ghost"></i>
-                    </a>
-                    <a href="#" class="social-icon bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="#" class="social-icon bg-green-500 text-white w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a href="#" class="social-icon bg-blue-400 text-white w-12 h-12 rounded-full flex items-center justify-center">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
+                <div class="social-container">
+                    <div class="flex justify-center flex-wrap gap-3">
+                        <a href="#" class="social-icon bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gradient-to-r from-purple-600 to-pink-600 text-white w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-black text-white w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-red-600 text-white w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-yellow-400 text-white w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fab fa-snapchat-ghost"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-green-500 text-white w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-blue-400 text-white w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
                 </div>
                 
                 <!-- Flip Button -->
@@ -505,6 +576,11 @@
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        © 2025 Connexa Technologies. All rights reserved.
+    </footer>
+
     <!-- QR Code Modal -->
     <div id="qrModal" class="qr-modal">
         <span class="close-qr" onclick="hideQRCode()">&times;</span>
@@ -519,19 +595,61 @@
     </div>
 
     <script>
-        // Hide loader when page loads
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('loader').style.display = 'none';
-                }, 500);
-            }, 2000);
+        // First show split screen animation, then loader, then main content
+window.addEventListener('load', function() {
+    const splitScreen = document.getElementById('split-screen-animation');
+    
+    // Show split screen animation first
+    splitScreen.style.display = 'flex';
+    
+    // After split screen animation completes
+    setTimeout(function() {
+        splitScreen.style.opacity = '0';
+        setTimeout(function() {
+            splitScreen.style.display = 'none';
             
             // Start banner carousel
             startBannerCarousel();
-        });
+            
+            // Add sparkle effects randomly
+            setInterval(createSparkle, 300);
+            
+            // Add profile picture animation for mobile
+            const profileImg = document.querySelector('.profile-image');
+            profileImg.addEventListener('touchstart', function() {
+                this.classList.add('bounce-animation');
+                setTimeout(() => {
+                    this.classList.remove('bounce-animation');
+                }, 1000);
+            });
+            
+        }, 500);
+    }, 4000); // Show split screen for 4 seconds
+});
 
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            
+            // Random position
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            
+            // Random color
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            document.body.appendChild(sparkle);
+            
+            // Remove after animation completes
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+        
         function flipCard() {
             const card = document.querySelector('.card');
             card.classList.toggle('flipped');
@@ -540,6 +658,13 @@
             card.style.animation = 'none';
             void card.offsetWidth; // Trigger reflow
             card.style.animation = 'flipAnimation 0.8s ease';
+            
+            // Add sparkle effect
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    createSparkle();
+                }, i * 100);
+            }
         }
         
         function copyToClipboard(text) {
@@ -553,6 +678,18 @@
                 tapEffect.style.top = (event.clientY - 40) + 'px';
                 document.body.appendChild(tapEffect);
                 
+                // Add sparkles
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'sparkle';
+                        sparkle.style.left = (event.clientX - 2.5 + Math.random() * 20) + 'px';
+                        sparkle.style.top = (event.clientY - 2.5 + Math.random() * 20) + 'px';
+                        document.body.appendChild(sparkle);
+                        setTimeout(() => sparkle.remove(), 1000);
+                    }, i * 100);
+                }
+                
                 setTimeout(() => {
                     document.body.removeChild(tapEffect);
                 }, 500);
@@ -562,6 +699,12 @@
         }
         
         function downloadVCF() {
+            // Show loading state
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Saving...';
+            button.classList.remove('pulse-animation');
+            
             // Create VCF content
             const vcfContent = `BEGIN:VCARD
 VERSION:3.0
@@ -574,29 +717,37 @@ URL:https://www.cyberselasi.com
 NOTE:Cybersecurity • Coding • Graphics Influencer
 END:VCARD`;
             
-            // Create download link
-            const blob = new Blob([vcfContent], { type: 'text/vcard' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'Eselase_Bali-Banini.vcf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // Trigger confetti animation
-            triggerConfetti();
-            
-            // Show success notification
-            showNotification('Contact saved successfully!', 'success');
-            
-            // Flip the card after download
-            setTimeout(() => {
-                flipCard();
-            }, 1500);
+            // Delay download by 2 seconds
+            setTimeout(function() {
+                // Create download link
+                const blob = new Blob([vcfContent], { type: 'text/vcard' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'Eselase_Bali-Banini.vcf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Reset button
+                button.innerHTML = originalText;
+                button.classList.add('pulse-animation');
+                
+                // Trigger confetti animation
+                triggerConfetti();
+                
+                // Show success notification
+                showNotification('Contact saved successfully!', 'success');
+                
+                // Flip the card after download
+                setTimeout(() => {
+                    flipCard();
+                }, 1500);
+            }, 2000);
         }
         
         function triggerConfetti() {
+            // Main burst
             confetti({
                 particleCount: 150,
                 spread: 70,
@@ -624,11 +775,51 @@ END:VCARD`;
                     colors: ['#ffff00', '#ff00ff', '#00ffff']
                 });
             }, 400);
+            
+            // Add floating hearts
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.style.position = 'fixed';
+                    heart.style.fontSize = (20 + Math.random() * 20) + 'px';
+                    heart.style.left = (Math.random() * window.innerWidth) + 'px';
+                    heart.style.top = (window.innerHeight + 30) + 'px';
+                    heart.style.zIndex = '1001';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.animation = `floatUp ${3 + Math.random() * 3}s linear forwards`;
+                    
+                    document.body.appendChild(heart);
+                    
+                    // Add animation
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        @keyframes floatUp {
+                            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                            100% { transform: translateY(-${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        heart.remove();
+                        style.remove();
+                    }, 5000);
+                }, i * 300);
+            }
         }
         
         function showQRCode() {
             const modal = document.getElementById('qrModal');
             modal.classList.add('show');
+            
+            // Add sparkle effect
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createSparkle();
+                }, i * 100);
+            }
         }
         
         function hideQRCode() {
@@ -644,6 +835,14 @@ END:VCARD`;
                 'Collaborations': 'Brand collaboration opportunities for tech products and services. Minimum 50k followers required.'
             };
             showNotification(messages[service]);
+            
+            // Add special effect based on service
+            if (service === 'Mentorship') {
+                document.querySelector('.card').classList.add('glow-animation');
+                setTimeout(() => {
+                    document.querySelector('.card').classList.remove('glow-animation');
+                }, 2000);
+            }
         }
         
         function showNotification(message, type = 'info') {
@@ -682,6 +881,13 @@ END:VCARD`;
                     document.body.removeChild(notification);
                 }, 500);
             }, 3000);
+            
+            // Add sparkles
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createSparkle();
+                }, i * 200);
+            }
         }
         
         // Banner Carousel Functionality
@@ -748,6 +954,17 @@ END:VCARD`;
                     }
                 });
             });
+            
+            // Add animation to profile picture on mobile devices
+            if ('ontouchstart' in window) {
+                const profileImg = document.querySelector('.profile-image');
+                profileImg.addEventListener('touchstart', function() {
+                    this.classList.add('bounce-animation');
+                    setTimeout(() => {
+                        this.classList.remove('bounce-animation');
+                    }, 1000);
+                });
+            }
         });
     </script>
 </body>
