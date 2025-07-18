@@ -215,12 +215,7 @@
         .contact-icon:hover {
             transform: rotate(15deg) scale(1.1);
         }
-        
-        .wave-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 C 20 0, 40 20, 60 10 S 90 0, 100 10' stroke='%23ffffff' stroke-width='2' fill='none' stroke-opacity='0.2'/%3E%3C/svg%3E");
-            background-size: 100px 20px;
-            opacity: 0.5;
-        }
+
         .footer-container {
         position: relative;
         z-index: 10;
@@ -235,6 +230,7 @@
         }
         #splashScreen {
             animation: fadeOut 0.5s ease-in-out 8s forwards;
+            background-color: rgba(222, 222, 222, 0.728);
         }
 
 
@@ -367,11 +363,87 @@
     50% { transform: translateY(-5px); }
 }
 
+
+
+/* Add to your existing styles */
+.slider-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.slider-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+.slider-slide {
+    min-width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+    filter: blur(1px);
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    background-color: white;
+    transform: scale(1.2);
+}
+/* Add this to your existing styles */
+.flip-btn, .qr-btn {
+    position: relative;
+    z-index: 20; /* Higher than slider z-index */
+}
+
+.profile-image, .profile-info-container {
+    position: relative;
+    z-index: 10; /* Higher than slider but lower than buttons */
+}
+/* Add these to your existing styles */
+.profile-info-container {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.text-blue-100 {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+}
     </style>
 </head>
 <body class="flex flex-col items-center justify-center p-4 md:p-8 min-h-screen">
        <!-- ===== ADD THIS SPLASH SCREEN ===== -->
-    <div id="splashScreen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+    <div id="splashScreen" class="fixed inset-0 z-50 flex items-center justify-center">
                 <dotlottie-wc
   src="https://lottie.host/f50d53f2-ec8c-4f09-a41c-57109307901c/59afAzsfJp.lottie"
   style="width: 300px;height: 300px"
@@ -393,34 +465,38 @@
                 <div class="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-blue-100 opacity-20"></div>
                 <div class="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-indigo-100 opacity-20"></div>
                 
-                <!-- Profile Section -->
                 <div class="bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-center relative overflow-hidden">
-                    <div class="absolute inset-0 wave-pattern"></div>
-                    <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
-                    
-                    <div class="flex justify-center floating">
-                        <div class="relative">
-                            <img src="IMG_2741-2.webp" 
-                                 alt="Profile Image" 
-                                 class="profile-image w-32 h-32 rounded-full object-cover z-10 relative">
-                            <div class="absolute inset-0 rounded-full bg-blue-500 opacity-10 -z-10 pulse" style="top: -5px; left: -5px; right: -5px; bottom: -5px;"></div>
-                        </div>
-                    </div>
-                    <h1 class="text-2xl font-bold text-white mt-6">Eselase Bali-Banini</h1>
-                    <p class="text-blue-100 font-medium mt-1">Assistant IT/IM Officer</p>
-                    <p class="text-blue-100">Digital Technology Directorate</p>
-                    
-                    <!-- Flip Button -->
-                    <button id="flipBtn" aria-label="Flip business card" class="flip-btn absolute top-4 right-4 w-10 h-10 glass-effect rounded-full flex items-center justify-center text-white">
-                        <i class="fas fa-exchange-alt"></i>
-                    </button>
-                    
-                    <!-- QR Code Button -->
-                    <button id="qrBtn" class="qr-btn flip-btn absolute top-4 left-4 w-10 h-10 glass-effect rounded-full flex items-center justify-center text-white hover:bg-opacity-30">
-                        <i class="fas fa-qrcode"></i>
-                    </button>
-                </div>
-                
+    <!-- Image Slider (background) -->
+    <div class="slider-container">
+        <div class="slider-track" id="frontSliderTrack"></div>
+        <div class="slider-dots" id="frontSliderDots"></div>
+    </div>
+    
+    <!-- Profile Content (foreground) -->
+    <div class="profile-info-container relative z-10">
+        <div class="flex justify-center floating">
+            <div class="relative">
+                <img src="IMG_2741-2.webp" 
+                     alt="Profile Image" 
+                     class="profile-image w-32 h-32 rounded-full object-cover z-10 relative">
+                <div class="absolute inset-0 rounded-full bg-blue-500 opacity-10 -z-10 pulse" style="top: -5px; left: -5px; right: -5px; bottom: -5px;"></div>
+            </div>
+        </div>
+        <h1 class="text-2xl font-bold text-white mt-6">Eselase Bali-Banini</h1>
+        <p class="text-blue-100 font-medium mt-1">Digital Technology Directorate</p><br>
+        <p class="text-blue-100">Ministry of Communication,<br> Digital Technology & Innovations</p>
+    </div>
+    
+    <!-- Flip Button -->
+    <button id="flipBtn" aria-label="Flip business card" class="flip-btn absolute top-4 right-4 w-10 h-10 glass-effect rounded-full flex items-center justify-center text-white">
+        <i class="fas fa-exchange-alt"></i>
+    </button>
+    
+    <!-- QR Code Button -->
+    <button id="qrBtn" class="qr-btn flip-btn absolute top-4 left-4 w-10 h-10 glass-effect rounded-full flex items-center justify-center text-white hover:bg-opacity-30">
+        <i class="fas fa-qrcode"></i>
+    </button>
+</div>
                 <!-- Contact Section -->
                 <div class="p-6 relative z-10">
                     <div class="flex justify-between items-center mb-4">
@@ -512,13 +588,19 @@
                     </div>
                 </div>
             </div>
-
             <!-- Back Side -->
             <div class="card-back absolute inset-0 w-full bg-white rounded-3xl overflow-hidden shadow-2xl">
                 <!-- Back Header -->
                 <div class="bg-gradient-to-br from-indigo-700 to-blue-600 p-6 text-center relative overflow-hidden z-10">
-                    <div class="absolute inset-0 wave-pattern"></div>
-                    <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
+    <!-- Image Slider -->
+    <div class="slider-container">
+        <div class="slider-track" id="backSliderTrack">
+            <!-- Slides will be added via JavaScript -->
+        </div>
+        <div class="slider-dots" id="backSliderDots">
+            <!-- Dots will be added via JavaScript -->
+        </div>
+    </div>
                     
                     <h1 class="text-2xl font-bold text-white">Professional Profile</h1>
                     <p class="text-blue-100 mt-1">Eselase Bali-Banini</p>
@@ -528,7 +610,6 @@
                         <i class="fas fa-exchange-alt"></i>
                     </button>
                 </div>
-                
                 <!-- Back Content -->
                 <div class="p-6 relative z-10">
                     <div class="mb-6">
@@ -917,6 +998,67 @@ END:VCARD`;
         });
     }
 });
+
+// Add this to your existing script, preferably at the beginning of the DOMContentLoaded event
+
+// Image slider functionality
+const sliderImages = [
+    'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+    'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1555&q=80',
+    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'
+];
+
+function initSlider(sliderTrackId, sliderDotsId) {
+    const sliderTrack = document.getElementById(sliderTrackId);
+    const sliderDots = document.getElementById(sliderDotsId);
+    
+    // Add slides
+    sliderImages.forEach((image, index) => {
+        // Add slide
+        const slide = document.createElement('div');
+        slide.className = 'slider-slide';
+        slide.style.backgroundImage = `url(${image})`;
+        sliderTrack.appendChild(slide);
+        
+        // Add dot
+        const dot = document.createElement('div');
+        dot.className = `slider-dot ${index === 0 ? 'active' : ''}`;
+        dot.dataset.index = index;
+        dot.addEventListener('click', () => {
+            goToSlide(index, sliderTrackId, sliderDotsId);
+        });
+        sliderDots.appendChild(dot);
+    });
+    
+    // Auto slide
+    let currentIndex = 0;
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % sliderImages.length;
+        goToSlide(currentIndex, sliderTrackId, sliderDotsId);
+    }, 5000);
+}
+
+function goToSlide(index, sliderTrackId, sliderDotsId) {
+    const sliderTrack = document.getElementById(sliderTrackId);
+    const sliderDots = document.getElementById(sliderDotsId);
+    
+    // Update track position
+    sliderTrack.style.transform = `translateX(-${index * 100}%)`;
+    
+    // Update dots
+    const dots = sliderDots.querySelectorAll('.slider-dot');
+    dots.forEach((dot, i) => {
+        if (i === index) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
+
+// Initialize both sliders
+initSlider('frontSliderTrack', 'frontSliderDots');
+initSlider('backSliderTrack', 'backSliderDots');
     </script>
 </body>
 </html>
