@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
     
     <link href="logo.png" rel="icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+
     <title>Digital Business Card | Eselase Bali-Banini</title>
     <script src="https://cdn.tailwindcss.com"></script>
         <!--  EmailJS Script -->
@@ -39,7 +43,7 @@
     <!-- font link optimized version -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
 
 
     <style>
@@ -49,7 +53,20 @@
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             min-height: 100vh;
         }
-        
+        .main-name {
+        font-family: "Cinzel Decorative", serif;
+        font-weight: 900;
+        font-style: normal;
+        }
+        .main-ministry {
+        font-family: "Spectral", serif;
+        font-weight: 800;
+        }
+        .main-directorate {
+        font-family: "Spectral", serif;
+        font-weight: 300;
+        font-style: italic;
+        }
         .profile-image {
             border: 5px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -484,9 +501,9 @@
                 <div class="absolute inset-0 rounded-full bg-blue-500 opacity-10 -z-10 pulse" style="top: -5px; left: -5px; right: -5px; bottom: -5px;"></div>
             </div>
         </div>
-        <h1 class="text-2xl font-bold text-white mt-6">Eselase Bali-Banini</h1>
-        <p class="text-blue-100" style="font-size: 18px; ">Ministry of Communication,<br> Digital Technology & Innovations</p>
-        <p class="text-blue-100 font-medium mt-1">Digital Technology Directorate</p>
+        <h1 class="text-2xl font-bold text-white mt-6 main-name">Eselase Bali-Banini</h1>
+        <p class="text-blue-100 main-ministry" style="font-size: 18px; ">Ministry of Communication,<br> Digital Technology & Innovations</p>
+        <p class="text-blue-100 font-medium mt-1 main-directorate">Digital Technology Directorate</p>
     </div>
     
     <!-- Flip Button -->
@@ -604,8 +621,8 @@
         </div>
     </div>
                     
-                    <h1 class="text-2xl font-bold text-white">Professional Profile</h1>
-                    <p class="text-blue-100 mt-1">Eselase Bali-Banini</p>
+                    <h1 class="text-2xl font-bold text-white main-ministry">Professional Profile</h1>
+                    <p class="text-blue-100 mt-1 main-name">Eselase Bali-Banini</p>
                     
                     <!-- Flip Button -->
                     <button id="flipBackBtn" class="flip-btn absolute top-4 right-4 w-10 h-10 glass-effect rounded-full flex items-center justify-center text-white">
