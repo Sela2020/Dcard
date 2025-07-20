@@ -232,7 +232,7 @@
         
         /* Product image container */
         .product-image-container {
-            height: 160px;
+            height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -300,7 +300,7 @@
         /* Cover image with gradient overlay */
         .cover-image {
             position: relative;
-            height: 180px;
+            height: 150px;
             overflow: hidden;
             
         }
@@ -326,34 +326,34 @@
         .profile-header {
             display: flex;
             align-items: center;
-            padding: 20px;
-            margin-top: -60px;
+            padding: 15px;
+            margin-top: -50px;
             position: relative;
             z-index: 2;
         }
         
         .profile-picture {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            border: 4px solid white;
+            border: 3px solid white;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             object-fit: cover;
         }
         
         .profile-info {
-            margin-left: 16px;
+            margin-left: 12px;
             flex: 1;
         }
         
         /* Section headers */
         .section-header {
             color: var(--primary-color);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
         }
@@ -363,7 +363,7 @@
             flex: 1;
             height: 1px;
             background: linear-gradient(to right, transparent, var(--primary-color), transparent);
-            margin: 0 10px;
+            margin: 0 8px;
         }
 
         /* Product card */
@@ -382,7 +382,7 @@
         }
 
         .product-image {
-            height: 120px;
+            height: 100px;
             width: 100%;
             object-fit: cover;
         }
@@ -390,25 +390,26 @@
         .original-price {
             text-decoration: line-through;
             color: #999;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
         .discounted-price {
             color: var(--primary-color);
             font-weight: 600;
+            font-size: 0.8rem;
         }
 
         /* Floating action button */
         .fab-container {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             z-index: 100;
         }
 
         .fab-main {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--primary-color);
             color: white;
@@ -426,11 +427,11 @@
 
         .fab-menu {
             position: absolute;
-            bottom: 60px;
+            bottom: 50px;
             right: 0;
             display: none;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .fab-menu.open {
@@ -438,8 +439,8 @@
         }
 
         .fab-item {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             background: white;
             color: var(--primary-color);
@@ -457,14 +458,101 @@
 
         /* Bio section */
         .bio-text {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             line-height: 1.5;
             color: var(--text-dark);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
+
+        /* Products horizontal scroll */
+        .products-scroll-container {
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        .products-scroll-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .product-scroll-item {
+            display: inline-block;
+            width: 150px;
+            margin-right: 10px;
+            white-space: normal;
+            vertical-align: top;
+        }
+
+        /* Auto-scrolling animation */
+        @keyframes scrollProducts {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-150px * 4 - 10px * 4)); }
+        }
+
+        .auto-scroll {
+            animation: scrollProducts 30s linear infinite;
+            display: inline-block;
+        }
+
+        /* Contact details columns */
+        .contact-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        /* Services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .service-item {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .service-icon {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        /* Gallery animation */
+        @keyframes galleryFade {
+            0%, 100% { opacity: 0.8; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .gallery-item {
+            animation: galleryFade 8s ease-in-out infinite;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0s; }
+        .gallery-item:nth-child(2) { animation-delay: 1s; }
+        .gallery-item:nth-child(3) { animation-delay: 2s; }
+        .gallery-item:nth-child(4) { animation-delay: 3s; }
+        .gallery-item:nth-child(5) { animation-delay: 4s; }
+        .gallery-item:nth-child(6) { animation-delay: 5s; }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 md:p-6">
+<body class="min-h-screen flex items-center justify-center p-3 md:p-4">
     <div class="card bg-white w-full max-w-md mx-auto">
         <!-- Cover Image with Gradient -->
         <div class="cover-image">
@@ -475,208 +563,202 @@
         <div class="profile-header">
             <img src="IMG_2741-2.webp" alt="Eselase Bali-Banini" class="profile-picture">
             <div class="profile-info">
-                <h1 class="name text-xl font-bold mb-1">Eselase Bali-Banini</h1>
+                <h1 class="name text-lg font-bold mb-1">Eselase Bali-Banini</h1>
                 <p class="title text-xs font-light tracking-widest text-gray-600">MASTER HAIR STYLIST</p>
             </div>
         </div>
 
         <!-- Bio Section -->
-        <div class="px-6 pt-2 pb-4">
+        <div class="px-4 pt-1 pb-3">
             <p class="bio-text">
                 With over 10 years of experience in the beauty industry, I specialize in creating personalized looks that enhance your natural beauty. My passion is helping clients feel confident and beautiful through exceptional hair care and styling.
             </p>
             
             <!-- Social Media Icons -->
-            <div class="flex justify-center space-x-3">
-                <a href="#" class="social-icon bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center text-sm">
+            <div class="flex justify-center space-x-2">
+                <a href="#" class="social-icon bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full w-7 h-7 flex items-center justify-center text-xs">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="#" class="social-icon bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center text-sm">
+                <a href="#" class="social-icon bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full w-7 h-7 flex items-center justify-center text-xs">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="#" class="social-icon bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center text-sm">
+                <a href="#" class="social-icon bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full w-7 h-7 flex items-center justify-center text-xs">
                     <i class="fab fa-tiktok"></i>
                 </a>
-                <a href="#" class="social-icon bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center text-sm">
+                <a href="#" class="social-icon bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full w-7 h-7 flex items-center justify-center text-xs">
                     <i class="fab fa-pinterest-p"></i>
                 </a>
             </div>
         </div>
         
         <!-- Card Body -->
-        <div class="p-6 md:p-8">
+        <div class="p-4 md:p-6">
             <!-- Contact Info -->
-            <div class="mb-8 scroll-animate" id="contact">
+            <div class="mb-6 scroll-animate" id="contact">
                 <div class="section-header">CONTACT DETAILS</div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="mailto:bselasi51@gmail.com" class="contact-card p-3">
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                                <i class="fas fa-envelope text-purple-600 text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500">Email</p>
-                                <p class="text-sm font-medium">bselasi51@gmail.com</p>
-                            </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="contact-column">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope text-purple-600 text-xs"></i>
                         </div>
-                    </a>
-                    
-                    <a href="tel:+233245332299" class="contact-card p-3">
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                                <i class="fas fa-phone-alt text-purple-600 text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500">Phone</p>
-                                <p class="text-sm font-medium">(233) 24 533-2299</p>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <div class="contact-card p-3">
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                                <i class="fas fa-clock text-purple-600 text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500">Working Hours</p>
-                                <p class="text-sm font-medium">Mon-Fri: 9am-7pm</p>
-                            </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">Email</p>
+                            <p class="text-xs font-medium">bselasi51@gmail.com</p>
                         </div>
                     </div>
                     
-                    <a href="https://maps.google.com?q=123+Beauty+Ave,+NY" target="_blank" class="contact-card p-3">
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                                <i class="fas fa-map-marker-alt text-purple-600 text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500">Location</p>
-                                <p class="text-sm font-medium">City St. Abeka-Lapaz, Accra</p>
-                            </div>
+                    <div class="contact-column">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt text-purple-600 text-xs"></i>
                         </div>
-                    </a>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">Phone</p>
+                            <p class="text-xs font-medium">(233) 24 533-2299</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-column">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock text-purple-600 text-xs"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">Working Hours</p>
+                            <p class="text-xs font-medium">Mon-Fri: 9am-7pm</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-column">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt text-purple-600 text-xs"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">Location</p>
+                            <p class="text-xs font-medium">City St. Abeka-Lapaz, Accra</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Save Contact Button -->
-                <button onclick="downloadVCard()" class="w-full mt-4 btn-primary text-white py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
-                    <i class="fas fa-address-card"></i> Save Contact
+                <button onclick="downloadVCard()" class="w-full mt-3 btn-primary text-white py-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1">
+                    <i class="fas fa-address-card text-xs"></i> Save Contact
                 </button>
             </div>
             
             <!-- Our Service Section -->
-            <div class="mb-8 scroll-animate" id="services">
+            <div class="mb-6 scroll-animate" id="services">
                 <div class="section-header">OUR SERVICES</div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div class="service-card p-4 rounded-xl bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm border border-white border-opacity-30">
-                        <div class="flex items-center mb-2">
-                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                                <i class="fas fa-cut text-purple-700 text-sm"></i>
-                            </div>
-                            <h3 class="text-sm font-semibold text-purple-900">Hair Cutting</h3>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-cut"></i>
                         </div>
-                        <p class="text-xs text-gray-600">Transform your look with our signature cutting services that highlight your unique style.</p>
+                        <h3 class="text-xs font-semibold text-purple-900 mb-1">Hair Cutting</h3>
+                        <p class="text-2xs text-gray-600">Transform your look with our signature cutting services</p>
                     </div>
                     
-                    <div class="service-card p-4 rounded-xl">
-                        <div class="flex items-center mb-2">
-                            <div class="w-10 h-10 rounded-full bg-purple-200 flex items-center justify-center mr-3">
-                                <i class="fas fa-paint-brush text-purple-700 text-sm"></i>
-                            </div>
-                            <h3 class="text-sm font-semibold text-purple-900">Coloring</h3>
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-paint-brush"></i>
                         </div>
-                        <p class="text-xs text-gray-600">Professional coloring services to enhance your natural beauty or make a bold statement.</p>
+                        <h3 class="text-xs font-semibold text-purple-900 mb-1">Coloring</h3>
+                        <p class="text-2xs text-gray-600">Professional coloring services to enhance your beauty</p>
                     </div>
                     
-                    <div class="service-card p-4 rounded-xl">
-                        <div class="flex items-center mb-2">
-                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                                <i class="fas fa-spa text-purple-700 text-sm"></i>
-                            </div>
-                            <h3 class="text-sm font-semibold text-purple-900">Hair Treatments</h3>
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-spa"></i>
                         </div>
-                        <p class="text-xs text-gray-600">Revitalize your hair with our nourishing treatments for damaged or dry hair.</p>
+                        <h3 class="text-xs font-semibold text-purple-900 mb-1">Hair Treatments</h3>
+                        <p class="text-2xs text-gray-600">Revitalize your hair with nourishing treatments</p>
                     </div>
                     
-                    <div class="service-card p-4 rounded-xl">
-                        <div class="flex items-center mb-2">
-                            <div class="w-10 h-10 rounded-full bg-purple-200 flex items-center justify-center mr-3">
-                                <i class="fas fa-magic text-purple-700 text-sm"></i>
-                            </div>
-                            <h3 class="text-sm font-semibold text-purple-900">Styling</h3>
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <i class="fas fa-magic"></i>
                         </div>
-                        <p class="text-xs text-gray-600">Special occasion styling to make you look your best for any event.</p>
+                        <h3 class="text-xs font-semibold text-purple-900 mb-1">Styling</h3>
+                        <p class="text-2xs text-gray-600">Special occasion styling for any event</p>
                     </div>
                 </div>
             </div>
 
             <!-- Book Appointment Section -->
-            <div class="mb-8 scroll-animate" id="appointment">
+            <div class="mb-6 scroll-animate" id="appointment">
                 <div class="section-header">BOOK APPOINTMENT</div>
                 
-                <div class="bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm rounded-xl p-4 shadow-sm">
-                    <p class="text-sm text-gray-600 mb-4">Schedule your next visit with me through Calendly:</p>
-                    <a href="https://calendly.com/alex-styles" target="_blank" class="w-full btn-primary text-white py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
-                        <i class="fas fa-calendar-alt"></i> Book Now
+                <div class="bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm rounded-xl p-3 shadow-sm">
+                    <p class="text-xs text-gray-600 mb-3">Schedule your next visit with me through Calendly:</p>
+                    <a href="https://calendly.com/alex-styles" target="_blank" class="w-full btn-primary text-white py-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1">
+                        <i class="fas fa-calendar-alt text-xs"></i> Book Now
                     </a>
                 </div>
             </div>
             
             <!-- Products Section -->
-            <div class="mb-8 scroll-animate" id="products">
+            <div class="mb-6 scroll-animate" id="products">
                 <div class="section-header">OUR PRODUCTS</div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Product 1 -->
-                    <div class="product-card">
-                        <img src="https://images.unsplash.com/photo-1608248543803-ba9f842f5288?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Hair Shampoo" class="product-image">
-                        <div class="p-4">
-                            <h3 class="text-sm font-semibold text-purple-900 mb-1">Hydrating Shampoo</h3>
-                            <p class="text-xs text-gray-600 mb-2">For dry and damaged hair</p>
-                            <div class="flex items-center">
-                                <span class="original-price text-xs mr-2">$35.00</span>
-                                <span class="discounted-price text-sm">$29.99</span>
+                <div class="products-scroll-container">
+                    <div class="auto-scroll">
+                        <!-- Product 1 -->
+                        <div class="product-scroll-item">
+                            <div class="product-card">
+                                <img src="https://images.unsplash.com/photo-1608248543803-ba9f842f5288?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Hair Shampoo" class="product-image">
+                                <div class="p-3">
+                                    <h3 class="text-xs font-semibold text-purple-900 mb-1">Hydrating Shampoo</h3>
+                                    <p class="text-2xs text-gray-600 mb-1">For dry and damaged hair</p>
+                                    <div class="flex items-center">
+                                        <span class="original-price text-2xs mr-1">$35.00</span>
+                                        <span class="discounted-price text-xs">$29.99</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Product 2 -->
-                    <div class="product-card">
-                        <img src="https://images.unsplash.com/photo-1596704017256-8a3624ab4a88?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Hair Conditioner" class="product-image">
-                        <div class="p-4">
-                            <h3 class="text-sm font-semibold text-purple-900 mb-1">Repair Conditioner</h3>
-                            <p class="text-xs text-gray-600 mb-2">Intensive repair treatment</p>
-                            <div class="flex items-center">
-                                <span class="original-price text-xs mr-2">$40.00</span>
-                                <span class="discounted-price text-sm">$34.99</span>
+                        
+                        <!-- Product 2 -->
+                        <div class="product-scroll-item">
+                            <div class="product-card">
+                                <img src="https://images.unsplash.com/photo-1596704017256-8a3624ab4a88?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Hair Conditioner" class="product-image">
+                                <div class="p-3">
+                                    <h3 class="text-xs font-semibold text-purple-900 mb-1">Repair Conditioner</h3>
+                                    <p class="text-2xs text-gray-600 mb-1">Intensive repair treatment</p>
+                                    <div class="flex items-center">
+                                        <span class="original-price text-2xs mr-1">$40.00</span>
+                                        <span class="discounted-price text-xs">$34.99</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Product 3 -->
-                    <div class="product-card">
-                        <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Hair Oil" class="product-image">
-                        <div class="p-4">
-                            <h3 class="text-sm font-semibold text-purple-900 mb-1">Argan Oil</h3>
-                            <p class="text-xs text-gray-600 mb-2">Nourishing hair treatment</p>
-                            <div class="flex items-center">
-                                <span class="original-price text-xs mr-2">$28.00</span>
-                                <span class="discounted-price text-sm">$24.99</span>
+                        
+                        <!-- Product 3 -->
+                        <div class="product-scroll-item">
+                            <div class="product-card">
+                                <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Hair Oil" class="product-image">
+                                <div class="p-3">
+                                    <h3 class="text-xs font-semibold text-purple-900 mb-1">Argan Oil</h3>
+                                    <p class="text-2xs text-gray-600 mb-1">Nourishing hair treatment</p>
+                                    <div class="flex items-center">
+                                        <span class="original-price text-2xs mr-1">$28.00</span>
+                                        <span class="discounted-price text-xs">$24.99</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Product 4 -->
-                    <div class="product-card">
-                        <img src="https://images.unsplash.com/photo-1595341595379-cf0f2a7c3613?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Hair Mask" class="product-image">
-                        <div class="p-4">
-                            <h3 class="text-sm font-semibold text-purple-900 mb-1">Keratin Mask</h3>
-                            <p class="text-xs text-gray-600 mb-2">Weekly deep conditioning</p>
-                            <div class="flex items-center">
-                                <span class="original-price text-xs mr-2">$45.00</span>
-                                <span class="discounted-price text-sm">$39.99</span>
+                        
+                        <!-- Product 4 -->
+                        <div class="product-scroll-item">
+                            <div class="product-card">
+                                <img src="https://images.unsplash.com/photo-1595341595379-cf0f2a7c3613?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Hair Mask" class="product-image">
+                                <div class="p-3">
+                                    <h3 class="text-xs font-semibold text-purple-900 mb-1">Keratin Mask</h3>
+                                    <p class="text-2xs text-gray-600 mb-1">Weekly deep conditioning</p>
+                                    <div class="flex items-center">
+                                        <span class="original-price text-2xs mr-1">$45.00</span>
+                                        <span class="discounted-price text-xs">$39.99</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -684,10 +766,10 @@
             </div>
             
             <!-- Gallery Section -->
-            <div class="mb-8 scroll-animate" id="gallery">
+            <div class="mb-6 scroll-animate" id="gallery">
                 <div class="section-header">GALLERY</div>
                 
-                <div class="grid grid-cols-3 gap-2">
+                <div class="grid grid-cols-3 gap-1">
                     <div class="gallery-item aspect-square bg-gray-100 rounded-lg overflow-hidden" onclick="openGallery(0)">
                         <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover" alt="Hair Style 1">
                     </div>
@@ -710,7 +792,7 @@
             </div>
             
             <!-- Testimonials Section -->
-            <div class="mb-8 scroll-animate" id="testimonials">
+            <div class="mb-6 scroll-animate" id="testimonials">
                 <div class="section-header">TESTIMONIALS</div>
                 
                 <div class="relative">
@@ -718,14 +800,14 @@
                         <div class="flex transition-transform duration-300 ease-in-out" id="testimonial-slider">
                             <!-- Testimonial 1 -->
                             <div class="w-full flex-shrink-0 px-1">
-                                <div class="testimonial-card bg-white p-4 rounded-xl border border-gray-100">
-                                    <div class="flex items-center mb-3">
-                                        <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                                <div class="testimonial-card bg-white p-3 rounded-xl border border-gray-100">
+                                    <div class="flex items-center mb-2">
+                                        <div class="w-8 h-8 rounded-full overflow-hidden mr-2">
                                             <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah J." class="w-full h-full object-cover">
                                         </div>
                                         <div>
-                                            <p class="font-semibold text-sm">Sarah J.</p>
-                                            <div class="flex text-purple-400 text-xs">
+                                            <p class="font-semibold text-xs">Sarah J.</p>
+                                            <div class="flex text-purple-400 text-2xs">
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
@@ -734,20 +816,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="text-gray-600 text-xs italic">"Eselase transformed my hair completely! After years of damage, she gave me the perfect cut and color that brought my hair back to life."</p>
+                                    <p class="text-gray-600 text-2xs italic">"Eselase transformed my hair completely! After years of damage, she gave me the perfect cut and color that brought my hair back to life."</p>
                                 </div>
                             </div>
                             
                             <!-- Testimonial 2 -->
                             <div class="w-full flex-shrink-0 px-1">
-                                <div class="testimonial-card bg-white p-4 rounded-xl border border-gray-100">
-                                    <div class="flex items-center mb-3">
-                                        <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                                <div class="testimonial-card bg-white p-3 rounded-xl border border-gray-100">
+                                    <div class="flex items-center mb-2">
+                                        <div class="w-8 h-8 rounded-full overflow-hidden mr-2">
                                             <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Michelle T." class="w-full h-full object-cover">
                                         </div>
                                         <div>
-                                            <p class="font-semibold text-sm">Michelle T.</p>
-                                            <div class="flex text-purple-400 text-xs">
+                                            <p class="font-semibold text-xs">Michelle T.</p>
+                                            <div class="flex text-purple-400 text-2xs">
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>
@@ -756,80 +838,79 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="text-gray-600 text-xs italic">"I've been going to Eselase for 3 years now and wouldn't trust anyone else with my hair. She always delivers beyond expectations."</p>
+                                    <p class="text-gray-600 text-2xs italic">"I've been going to Eselase for 3 years now and wouldn't trust anyone else with my hair. She always delivers beyond expectations."</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Testimonial Navigation -->
-                    <div class="flex justify-center mt-3 space-x-2">
-                        <button onclick="prevTestimonial()" class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center hover:bg-purple-200 transition-colors">
-                            <i class="fas fa-chevron-left text-xs"></i>
+                    <div class="flex justify-center mt-2 space-x-1">
+                        <button onclick="prevTestimonial()" class="w-5 h-5 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center hover:bg-purple-200 transition-colors">
+                            <i class="fas fa-chevron-left text-2xs"></i>
                         </button>
-                        <button onclick="nextTestimonial()" class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center hover:bg-purple-200 transition-colors">
-                            <i class="fas fa-chevron-right text-xs"></i>
+                        <button onclick="nextTestimonial()" class="w-5 h-5 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center hover:bg-purple-200 transition-colors">
+                            <i class="fas fa-chevron-right text-2xs"></i>
                         </button>
                     </div>
                 </div>
             </div>
             
             <!-- Business Hours Section -->
-            <div class="mb-8 scroll-animate" id="hours">
+            <div class="mb-6 scroll-animate" id="hours">
                 <div class="section-header">BUSINESS HOURS</div>
                 
                 <div class="bg-white bg-opacity-70 backdrop-filter backdrop-blur-sm rounded-xl overflow-hidden shadow-sm">
-                    <div class="hours-row p-3 border-b border-gray-100 flex justify-between">
-                        <span class="font-medium text-sm">Monday - Friday</span>
-                        <span class="text-sm">9:00 AM - 7:00 PM</span>
+                    <div class="hours-row p-2 border-b border-gray-100 flex justify-between">
+                        <span class="font-medium text-xs">Monday - Friday</span>
+                        <span class="text-xs">9:00 AM - 7:00 PM</span>
                     </div>
-                    <div class="hours-row p-3 border-b border-gray-100 flex justify-between">
-                        <span class="font-medium text-sm">Saturday</span>
-                        <span class="text-sm text-gray-400">Closed</span>
+                    <div class="hours-row p-2 border-b border-gray-100 flex justify-between">
+                        <span class="font-medium text-xs">Saturday</span>
+                        <span class="text-xs text-gray-400">Closed</span>
                     </div>
-                    <div class="hours-row p-3 flex justify-between">
-                        <span class="font-medium text-sm">Sunday</span>
-                        <span class="text-sm">10:00 AM - 5:00 PM</span>
+                    <div class="hours-row p-2 flex justify-between">
+                        <span class="font-medium text-xs">Sunday</span>
+                        <span class="text-xs">10:00 AM - 5:00 PM</span>
                     </div>
                 </div>
             </div>
             
             <!-- QR Code Section -->
-            <div class="mb-8 scroll-animate" id="qrcode">
+            <div class="mb-6 scroll-animate" id="qrcode">
                 <div class="section-header">SCAN TO SAVE</div>
                 
                 <div class="flex items-center justify-center">
                     <div class="qr-container">
-                        <div class="w-40 h-40 bg-gray-100 flex items-center justify-center rounded-lg">
-                            <i class="fas fa-qrcode text-gray-400 text-4xl"></i>
+                        <div class="w-32 h-32 bg-gray-100 flex items-center justify-center rounded-lg">
+                            <i class="fas fa-qrcode text-gray-400 text-3xl"></i>
                         </div>
                     </div>
                 </div>
                 
-                <button onclick="downloadVCard()" class="w-full mt-4 btn-primary text-white py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
-                    <i class="fas fa-user-plus"></i> Add to Contacts
+                <button onclick="downloadVCard()" class="w-full mt-3 btn-primary text-white py-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1">
+                    <i class="fas fa-user-plus text-xs"></i> Add to Contacts
                 </button>
             </div>
         </div>
         
         <!-- Card Footer -->
-        <div class="bg-gray-50 px-6 py-3 text-center border-t border-gray-100">
-            <p class="text-xs text-gray-500">© 2025 Connexa | All Rights Reserved</p>
+        <div class="bg-gray-50 px-4 py-2 text-center border-t border-gray-100">
+            <p class="text-2xs text-gray-500">© 2025 Connexa | All Rights Reserved</p>
         </div>
     </div>
 
     <!-- Floating Action Button -->
     <div class="fab-container">
         <div class="fab-main" id="fab-main">
-            <i class="fas fa-plus"></i>
+            <i class="fas fa-plus text-sm"></i>
         </div>
         <div class="fab-menu" id="fab-menu">
             <a href="https://wa.me/+233245332299" target="_blank" class="fab-item">
-                
-            <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-whatsapp text-sm"></i>
             </a>
             <a href="https://tiktok.com/@alexandrastyles" target="_blank" class="fab-item">
-                <i class="fab fa-tiktok"></i>
+                <i class="fab fa-tiktok text-sm"></i>
             </a>
         </div>
     </div>
@@ -837,7 +918,7 @@
     <!-- Gallery Modal -->
     <div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4 hidden">
         <div class="relative w-full max-w-4xl">
-            <button onclick="closeGallery()" class="absolute -top-10 right-0 text-white text-xl z-10">
+            <button onclick="closeGallery()" class="absolute -top-8 right-0 text-white text-lg z-10">
                 <i class="fas fa-times"></i>
             </button>
             
@@ -846,17 +927,17 @@
                     <!-- Gallery images will be inserted here by JavaScript -->
                 </div>
                 
-                <button onclick="prevGalleryImage()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white w-8 h-8 rounded-full flex items-center justify-center z-10">
-                    <i class="fas fa-chevron-left text-sm"></i>
+                <button onclick="prevGalleryImage()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white w-7 h-7 rounded-full flex items-center justify-center z-10">
+                    <i class="fas fa-chevron-left text-xs"></i>
                 </button>
                 
-                <button onclick="nextGalleryImage()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white w-8 h-8 rounded-full flex items-center justify-center z-10">
-                    <i class="fas fa-chevron-right text-sm"></i>
+                <button onclick="nextGalleryImage()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white w-7 h-7 rounded-full flex items-center justify-center z-10">
+                    <i class="fas fa-chevron-right text-xs"></i>
                 </button>
             </div>
             
-            <div class="text-center mt-3 text-white">
-                <p id="gallery-counter" class="text-xs"></p>
+            <div class="text-center mt-2 text-white">
+                <p id="gallery-counter" class="text-2xs"></p>
             </div>
         </div>
     </div>
@@ -900,7 +981,7 @@
         galleryImages.forEach((img, index) => {
             const slide = document.createElement('div');
             slide.className = 'w-full flex-shrink-0';
-            slide.innerHTML = `<img src="${img}" class="w-full h-auto max-h-[80vh] object-contain" alt="Gallery Image ${index + 1}">`;
+            slide.innerHTML = `<img src="${img}" class="w-full h-auto max-h-[70vh] object-contain" alt="Gallery Image ${index + 1}">`;
             gallerySlider.appendChild(slide);
         });
         
@@ -968,13 +1049,13 @@
             // Create vCard content
             const vcard = `BEGIN:VCARD
 VERSION:3.0
-FN:Alexandra Styles
-ORG:Style Salon
+FN:Eselase Bali-Banini
+ORG:Hair Salon
 TITLE:Master Hair Stylist
-TEL;TYPE=WORK,VOICE:(555) 123-4567
-EMAIL;TYPE=PREF,INTERNET:alex@stylesalon.com
-ADR;TYPE=WORK:;;123 Beauty Ave;New York;;10001;USA
-URL:https://stylesalon.com
+TEL;TYPE=WORK,VOICE:(233) 24 533-2299
+EMAIL;TYPE=PREF,INTERNET:bselasi51@gmail.com
+ADR;TYPE=WORK:;;City St. Abeka-Lapaz;Accra;;Ghana
+URL:https://yourwebsite.com
 END:VCARD`;
             
             // Create download link
@@ -983,7 +1064,7 @@ END:VCARD`;
             
             const link = document.createElement('a');
             link.href = url;
-            link.download = 'connexa-pro.vcf';
+            link.download = 'eselase-bali-banini.vcf';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
