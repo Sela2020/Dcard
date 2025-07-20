@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexa | Premium Digital Business Cards</title>
+    <link href="logo.png" rel="icon" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
@@ -379,7 +380,7 @@
                         </div>
                     </div>
                     
-                    <div class="flex flex-wrap gap-3">
+                    <div class="flex flex-wrap gap-2">
                         <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
                             <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
                             <span class="text-sm font-medium">Instant Updates</span>
@@ -391,6 +392,19 @@
                         <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
                             <div class="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
                             <span class="text-sm font-medium">Multi-Device Sync</span>
+                        </div>
+                          <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
+                            <div class="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
+                            <span class="text-sm font-medium">Sustainability</span>
+                        </div>
+                          <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
+                            <div class="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
+                            <span class="text-sm font-medium">Customizable Design</span>
+                        </div>
+                        <div>
+                          <div class="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
+                            <div class="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
+                            <span class="text-sm font-medium">QR Code Integration</span>
                         </div>
                     </div>
                 </div>
@@ -693,8 +707,8 @@
 <script>
     // Central Feature Registry with tier-specific descriptions
     const features = {
-        digitalCard: {
-            label: "Connexa Card",
+        slink: {
+            label: "Social Links",
             description: {
                 basic: "1 standard digital business card",
                 pro: "2 customizable digital business cards",
@@ -785,15 +799,65 @@
             label: "Contact ShareBack",
             description: "Displays Connexa branding on your digital card.",
             order: 15
-        }
+        },
+        customFonts: {
+            label: "Custom Fonts",
+            description: "Displays Connexa branding on your digital card.",
+            order: 16
+        },
+        products: {
+            label: "Products",
+            description: "Displays Connexa branding on your digital card.",
+            order: 17
+        },
+        services: {
+            label: "Services",
+            description: "Displays Connexa branding on your digital card.",
+            order: 18
+        },
+        appointments: {
+            label: "Appointments",
+            description: "Displays Connexa branding on your digital card.",
+            order: 19
+        },
+        gallary: {
+            label: "Gallery",
+            description: "Displays Connexa branding on your digital card.",
+            order: 15
+        },
+        contactShareback: {
+            label: "Contact ShareBack",
+            description: "Displays Connexa branding on your digital card.",
+            order: 15
+        },
+        feeds: {
+            label: "Feeds",
+            description: "Displays Connexa branding on your digital card.",
+            order: 15
+        },
+        affiliation: {
+            label: "Affiliation",
+            description: "Displays Connexa branding on your digital card.",
+            order: 15
+        },
+        enquiryForm: {
+            label: "Enquiry Form",
+            description: "Displays Connexa branding on your digital card.",
+            order: 15
+        },
+        contactShareback: {
+            label: "Contact ShareBack",
+            description: "Displays Connexa branding on your digital card.",
+            order: 15
+        },
         
     };
 
     // Feature Availability by Tier
     const tierFeatures = {
-        basic: ['digitalCard', 'qrCode', 'ads', 'passwordProtection', 'standardTemp', 'ourLogo'],
-        pro: ['digitalCard', 'qrCode', 'ads', 'smartTag', 'advancedAnalytics', 'passwordProtection', 'brandQr', 'brandTemp','contactShareback'],
-        enterprise: ['digitalCard', 'qrCode', 'ads', 'smartTag', 'advancedAnalytics', 
+        basic: ['slink', 'qrCode', 'ads', 'passwordProtection', 'standardTemp', 'ourLogo'],
+        pro: ['slink', 'qrCode', 'ads', 'smartTag', 'advancedAnalytics', 'passwordProtection', 'brandQr', 'brandTemp','contactShareback'],
+        enterprise: ['slink', 'qrCode', 'ads', 'smartTag', 'advancedAnalytics', 
                     'passwordProtection', 'teamManagement', 'dedicatedSupport', 'accountManager', 
                     'brandingOptions', 'brandQr', 'brandTemp','contactShareback']
     };
